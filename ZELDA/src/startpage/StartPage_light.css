@@ -1,0 +1,230 @@
+:root {
+    --bg-color: #f3f4f6;           /* 밝은 회색 배경 */
+    --text-main: #111827;          /* 진한 검정 텍스트 */
+    --text-sub: #6b7280;           /* 연한 회색 텍스트 */
+    --accent-color: #2563eb;       /* 신뢰의 로얄 블루 */
+    --card-bg: #ffffff;            /* 카드 배경 흰색 */
+    --danger-color: #ef4444;       /* 경고 레드 */
+    --font-tech: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-mono: 'Courier New', Courier, monospace;
+  }
+  
+  /* 2. 전체 레이아웃 초기화 */
+  html, body, #root {
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    background-color: var(--bg-color);
+    font-family: var(--font-tech);
+    color: var(--text-main);
+    overflow-x: hidden;
+  }
+  
+  .terminal-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    box-sizing: border-box;
+    
+    /* 배경 격자 패턴 */
+    background-image: 
+      linear-gradient(#e5e7eb 1px, transparent 1px),
+      linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  
+  /* 헤더 스타일 */
+  .terminal-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  .system-log {
+    background-color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-sub);
+    border-left: 5px solid var(--accent-color);
+    margin-bottom: 2rem;
+    text-align: left;
+    display: inline-block;
+    line-height: 1.5;
+  }
+  
+  .glitch-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--text-main);
+    margin: 0;
+    letter-spacing: -2px;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.05);
+  }
+  
+  .sub-title {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-top: 10px;
+  }
+  
+  /* 3. 그리드 컨테이너 (핵심: 가로 3열 강제 배치) */
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 무조건 3등분 */
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px; /* 전체 최대 너비 */
+  }
+  
+  /* 4. 카드 스타일 */
+  .hacker-card {
+    /* width, max-width 제한을 풀어야 그리드 칸을 꽉 채움 */
+    width: 100%; 
+    min-height: 320px; /* 높이 통일감을 위해 최소 높이 지정 */
+    
+    background-color: var(--card-bg);
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 2rem;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  
+  /* 카드 호버 효과 */
+  .hacker-card:not(.locked):hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.2);
+    border-color: var(--accent-color);
+  }
+  
+  /* 카드 내부 텍스트 */
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--text-sub);
+  }
+  
+  .status-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .status-dot.green { background-color: #10b981; box-shadow: 0 0 0 2px #d1fae5; }
+  .status-dot.red { background-color: var(--danger-color); }
+  
+  .level-title {
+    color: var(--text-main);
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 0.5rem 0;
+  }
+  .hacker-card:not(.locked):hover .level-title { color: var(--accent-color); }
+  
+  .separator {
+    height: 2px;
+    background-color: #f3f4f6;
+    margin: 1rem 0;
+    width: 100%;
+  }
+  
+  .level-subtitle {
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .level-desc {
+    color: var(--text-sub);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  
+  .card-footer {
+    margin-top: auto;
+    text-align: right;
+  }
+  
+  .execute-cmd {
+    background-color: #f3f4f6;
+    color: var(--text-main);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: bold;
+    transition: 0.2s;
+  }
+  
+  .hacker-card:not(.locked):hover .execute-cmd {
+    background-color: var(--accent-color);
+    color: white;
+  }
+  
+  /* 5. 잠긴 상태 스타일 */
+  .hacker-card.locked {
+    background-color: #f9fafb;
+    border: 1px dashed #d1d5db;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  
+  .hacker-card.locked .level-title,
+  .hacker-card.locked .level-subtitle,
+  .hacker-card.locked .level-desc {
+    color: #9ca3af;
+  }
+  
+  .hacker-card.locked .status-dot.red {
+    background-color: #d1d5db;
+    box-shadow: none;
+  }
+  
+  .lock-icon {
+    font-size: 1.2rem;
+    color: #9ca3af;
+    text-align: center;
+    margin: 2rem 0;
+    font-weight: bold;
+  }
+  
+  .hacker-card.locked:hover {
+    background-color: #fef2f2;
+    border-color: var(--danger-color);
+  }
+  .hacker-card.locked:hover .lock-icon { color: var(--danger-color); }
+  
+  /* 6. 반응형 (모바일에서는 1열로 변경) */
+  @media (max-width: 1024px) {
+    .grid-container {
+      grid-template-columns: 1fr;
+    }
+    .glitch-title {
+      font-size: 2.5rem;
+    }
+  }

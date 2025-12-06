@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import './StartPage_light.css';
-import { SHA256 } from 'crypto-js';
 
 function StartPage() {
   const [unlockedStage, setUnlockedStage] = useState(1);
+  const API_ENDPOINT = "https://693408584090fe3bf01eb2cf.mockapi.io/password"; 
 
   const gameLevels = [
     {
@@ -13,16 +13,14 @@ function StartPage() {
       subtitle: "Web Hacking / Basic SQLi",
       description: "보안이 허술한 웹사이트의 취약점을 찾아 진입하십시오.",
       url: "/level1",
-      passwordHash: null 
     },
     {
       id: 2,
+      code: "L2_STORAGE",
       title: "LEVEL 2: SECURE STORAGE?",
       subtitle: "Web Storage & Web Crypto API",
       description: "강력하게 암호화된 금고입니다. 하지만 열쇠가 어딘가에 떨어져 있습니다.",
       url: "./level2",
-      // FLAG{Storage_Is_Not_Safe_Place} 의 해시값
-      passwordHash: "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4" 
     },
     {
       id: 3,
@@ -31,42 +29,51 @@ function StartPage() {
       subtitle: "System Pwnable / RCE",
       description: "2단계를 클리어하고 얻은 비밀번호(Flag)를 입력하십시오.",
       url: "./level3",
-      // 원래 정답: FLAG{Keep_Going}
-      passwordHash: "d51b798ff5f8c5de686d421868db4d8ed7b703edba0e259c610b8122a9845b74"
     },
   ];
 
-  const handleCardClick = (e, level) => {
+  const handleCardClick = async (e, level) => {
+    // 1. 이미 해금된 레벨이면 클릭 시 해당 URL로 이동
     if (level.id <= unlockedStage) return;
 
+    // 2. 잠긴 레벨 클릭 시 이동 막기
     e.preventDefault();
     
+    // 3. 순서대로 깨야 함 (건너뛰기 방지)
     if (level.id > unlockedStage + 1) {
       alert("⚠️ 이전 단계를 먼저 클리어하십시오.");
       return;
     }
 
-    const input = prompt(`[SYSTEM] ${level.title} 접근 권한이 필요합니다.\n비밀번호(Flag)를 입력하십시오:`);
+    // 4. 사용자 입력 받기
+    const input = prompt('[SYSTEM] ${level.title} 접근 권한이 필요합니다.\n비밀번호(Flag)를 입력하십시오:');
 
     if (input) {
-      // 3. 유저가 입력한 값을 똑같이 암호화합니다.
-      const inputHash = SHA256(input).toString();
+      try {
+        const response = await fetch(API_ENDPOINT, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        });
 
-      // 개발자 확인용 (나중에 지우세요): 콘솔창(F12)에 내가 입력한 값의 해시가 뜹니다.
-      console.log(`입력값: ${input}`);
-      console.log(`변환된 해시: ${inputHash}`);
+        if (!response.ok) {
+            throw new Error('API 요청 실패 (주소를 확인하세요)');
+        }
 
-      // 4. 해시값끼리 비교합니다.
-      if (inputHash === level.passwordHash) {
-        alert("ACCESS GRANTED. 접근 권한이 승인되었습니다.");
-        setUnlockedStage(level.id);
-      } else {
-        alert("ACCESS DENIED. 비밀번호가 일치하지 않습니다.");
+        const data = await response.json();
+        if (input === data[level.id - 2].password) {
+          alert("ACCESS GRANTED. 승인되었습니다.");
+          setUnlockedStage(level.id);
+        } else {
+          alert("ACCESS DENIED. 비밀번호가 일치하지 않습니다.");
+        }
+
+      } catch (error) {
+        console.error("Error:", error);
+        alert("⚠️ 서버 연결 오류: API 주소가 올바른지 확인해주세요.");
       }
     }
   };
 
-  // ... (return 아래 부분은 기존과 동일하므로 그대로 두시면 됩니다)
   return (
     <div className="terminal-container">
       <div className="overlay-scanline"></div>
@@ -74,7 +81,7 @@ function StartPage() {
       <header className="terminal-header">
         <p className="system-log">
           &gt; SYSTEM_BOOT_SEQUENCE_INIT... OK<br/>
-          &gt; CONNECTING_TO_SERVER... ESTABLISHED<br/>
+          &gt; CONNECTING_TO_AUTH_SERVER... ESTABLISHED<br/>
           &gt; CURRENT_ACCESS_LEVEL: {unlockedStage} / 3
         </p>
         <h1 className="glitch-title" data-text="CYBER WARGAME">CYBER WARGAME</h1>
@@ -118,7 +125,7 @@ function StartPage() {
 
               <div className="card-footer">
                 <span className="execute-cmd">
-                  {isLocked ? "./decrypt_password.exe" : "./execute_exploit.sh"}
+                  {isLocked ? "./auth_request.sh" : "./execute_exploit.sh"}
                 </span>
                 <span className="blinking-cursor">_</span>
               </div>

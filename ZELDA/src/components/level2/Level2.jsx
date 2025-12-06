@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Level1.css';
+import './Level2.css';
 
 function Level2() { 
     const [activeSection, setActiveSection] = useState('intro');

@@ -52,14 +52,14 @@ export default function Level3() {
 
                 {/* [오른쪽] 본문 */}
                 <main className="content-panel">
-                    <h1 className="section-title">JWT Logic Flaw</h1>
+                    <h1 className="section-title1">JWT Logic Flaw</h1>
                     <p className="section-desc">현대 웹 인증의 표준인 JWT(JSON Web Token)의 구조와, 치명적인 설계 결함(None Algorithm)을 학습합니다.</p>
                     
                     <hr style={{ margin: '30px 0', border: 'none', borderTop: '1px solid #e2e8f0' }} />
 
                     {/* 1. JWT란? */}
                     <div id="intro" style={{ paddingTop: '10px' }}>
-                        <h2 className="sub-title">01. JWT(JSON Web Token)란?</h2>
+                        <h2 className="sub-title1">01. JWT(JSON Web Token)란?</h2>
                         <p className="text-body">
                             JWT는 유저 정보를 JSON 형태로 담아 암호화(또는 인코딩)한 토큰입니다. 
                             로그인 시 서버가 발급해주며, 클라이언트는 이 토큰을 저장했다가 요청할 때마다 제시하여 "나 로그인했어!"라고 증명합니다.
@@ -68,7 +68,7 @@ export default function Level3() {
 
                     {/* 2. 구조 */}
                     <div id="structure" style={{ paddingTop: '20px' }}>
-                        <h2 className="sub-title">02. 토큰의 3단 구조</h2>
+                        <h2 className="sub-title1">02. 토큰의 3단 구조</h2>
                         <p className="text-body">
                             JWT는 점(<code>.</code>)으로 구분된 세 부분으로 이루어져 있습니다.
                         </p>
@@ -81,7 +81,7 @@ export default function Level3() {
 
                     {/* 3. 시뮬레이터 (Interactive) */}
                     <div id="simulation" style={{ paddingTop: '20px' }}>
-                        <h2 className="sub-title">03. JWT 해부기 (Interactive)</h2>
+                        <h2 className="sub-title1">03. JWT 해부기 (Interactive)</h2>
                         <p className="text-body">
                             아래 JSON을 수정해보세요. 자동으로 인코딩되어 토큰이 만들어지는 과정을 볼 수 있습니다.
                         </p>
@@ -127,7 +127,7 @@ export default function Level3() {
 
                     {/* 4. 공격 기법 */}
                     <div id="attack" style={{ paddingTop: '20px' }}>
-                        <h2 className="sub-title">04. None 알고리즘 취약점 (CVE-2015-9235)</h2>
+                        <h2 className="sub-title1">04. None 알고리즘 취약점 (CVE-2015-9235)</h2>
                         <p className="text-body">
                             일부 JWT 라이브러리는 헤더의 <code>alg</code> 값을 <code>none</code>으로 설정하면, 
                             <strong>"서명이 없어도 되는 토큰이구나"</strong>라고 착각하고 검증을 건너뛰는 치명적인 버그가 있었습니다.

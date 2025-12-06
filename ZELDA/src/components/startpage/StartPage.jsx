@@ -22,7 +22,7 @@ function StartPage() {
       description: "강력하게 암호화된 금고입니다. 하지만 열쇠가 어딘가에 떨어져 있습니다.",
       url: "./level2",
       // FLAG{Storage_Is_Not_Safe_Place} 의 해시값
-      passwordHash: "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4" 
+      passwordHash: "61ff58ff9255b018e9510a922af86a96f4e34b9b4bd2cabf4628584fd84846c7" 
     },
     {
       id: 3,

@@ -21,7 +21,7 @@ function StartPage() {
       subtitle: "Web Storage & Web Crypto API",
       description: "강력하게 암호화된 금고입니다. 하지만 열쇠가 어딘가에 떨어져 있습니다.",
       url: "./level2",
-      // FLAG{Storage_Is_Not_Safe_Place} 의 해시값
+      // 1234 의 해시값
       passwordHash: "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4" 
     },
     {
@@ -30,7 +30,7 @@ function StartPage() {
       title: "LEVEL 3: BLACK HAT",
       subtitle: "System Pwnable / RCE",
       description: "2단계를 클리어하고 얻은 비밀번호(Flag)를 입력하십시오.",
-      url: "https://pwnable.kr/",
+      url: "./level3",
       // 원래 정답: FLAG{Keep_Going}
       passwordHash: "d51b798ff5f8c5de686d421868db4d8ed7b703edba0e259c610b8122a9845b74"
     },

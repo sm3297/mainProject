@@ -11,7 +11,7 @@ const STORAGE = {
 };
 const SECRET_FLAG = "FLAG{Real_World_Hacking_Is_Silent}";
 
-export default function Level2() {
+export default function Level2Game() {
   // --- State ---
   const [notes, setNotes] = useState([]);
   const [selected, setSelected] = useState(null);

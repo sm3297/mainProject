@@ -7,6 +7,8 @@ import Level1 from './components/level1/Level1.jsx'
 import Level1Game from './components/level1/Level1Game.jsx' 
 import Level2 from './components/level2/Level2.jsx'
 import AdminPage from './components/level1/AdminPage.jsx'
+import Level3 from './components/level3/Level3.jsx'
+import Level3Game from './components/level3/Level3Game.jsx' 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -17,6 +19,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/level1Game" element={<Level1Game />} />
         <Route path="/admin-secret" element={<AdminPage />} />
         <Route path="/level2" element={<Level2 />} />
+        <Route path="/level3" element={<Level3 />} />
+          <Route path="/level3Game" element={<Level3Game />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

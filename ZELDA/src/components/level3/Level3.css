@@ -1,0 +1,145 @@
+/* src/pages/level3/Level3.css */
+
+/* 전체 배경 (Dark Mode) */
+.bank-body {
+  background-color: #111827; /* Deep Dark */
+  color: #f3f4f6;
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 중앙 카드 디자인 */
+.bank-card {
+  background: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 16px;
+  width: 400px;
+  padding: 40px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 상단 골드 라인 포인트 */
+.bank-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #d4af37, #fcd34d, #d4af37);
+}
+
+.bank-logo {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #fcd34d; /* Gold Color */
+  margin-bottom: 5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.bank-subtitle {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-bottom: 30px;
+}
+
+/* 사용자 정보 박스 */
+.user-info-box {
+  background-color: #111827;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+  border: 1px solid #374151;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: #d1d5db;
+}
+
+.info-val { font-weight: bold; color: #fff; }
+
+/* 등급 뱃지 */
+.role-badge { 
+  background: #374151; 
+  color: #9ca3af; 
+  padding: 2px 8px; 
+  border-radius: 4px; 
+  font-size: 0.8rem; 
+}
+
+/* VIP 해킹 성공 시 스타일 */
+.role-badge.vip {
+  background: linear-gradient(135deg, #d4af37, #f59e0b);
+  color: #111;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+/* 입장 버튼 */
+.vault-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.vault-btn:hover { background-color: #1d4ed8; }
+
+/* 성공 Flag 박스 */
+.bank-secret {
+  margin-top: 25px;
+  padding: 15px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid #059669;
+  color: #34d399;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  word-break: break-all;
+}
+
+/* 힌트 버튼 스타일 */
+.hint-toggle {
+  background: none;
+  border: none;
+  color: #4b5563;
+  font-size: 0.8rem;
+  margin-top: 20px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.hint-toggle:hover { color: #9ca3af; }
+
+.hint-box {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: #6b7280;
+  background: #111;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: left;
+  line-height: 1.5;
+}
+
+/* 나가기 링크 */
+.exit-link {
+    color: #6b7280;
+    text-decoration: none;
+    font-size: 0.8rem;
+}

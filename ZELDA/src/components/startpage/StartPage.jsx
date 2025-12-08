@@ -1,7 +1,11 @@
 import { useState } from 'react';
-import './StartPage_light.css';
+import { Link } from 'react-router-dom'; 
+import { useAuth } from '../../context/AuthContext'; 
+import './StartPage.css';
 
 function StartPage() {
+  const { user, logout } = useAuth();
+  
   const [unlockedStage, setUnlockedStage] = useState(1);
   const API_ENDPOINT = "https://693408584090fe3bf01eb2cf.mockapi.io/password"; 
 
@@ -20,7 +24,7 @@ function StartPage() {
       title: "LEVEL 2: SECURE STORAGE?",
       subtitle: "Web Storage & Web Crypto API",
       description: "강력하게 암호화된 금고입니다. 하지만 열쇠가 어딘가에 떨어져 있습니다.",
-      url: "./level2",
+      url: "/level2",
     },
     {
       id: 3,
@@ -28,25 +32,25 @@ function StartPage() {
       title: "LEVEL 3: BLACK HAT",
       subtitle: "System Pwnable / RCE",
       description: "2단계를 클리어하고 얻은 비밀번호(Flag)를 입력하십시오.",
-      url: "./level3",
+      url: "/level3",
     },
   ];
 
   const handleCardClick = async (e, level) => {
-    // 1. 이미 해금된 레벨이면 클릭 시 해당 URL로 이동
+    // 1. 이미 해금된 레벨이면 통과
     if (level.id <= unlockedStage) return;
 
-    // 2. 잠긴 레벨 클릭 시 이동 막기
+    // 2. 잠긴 레벨 클릭 방지
     e.preventDefault();
     
-    // 3. 순서대로 깨야 함 (건너뛰기 방지)
+    // 3. 순서 체크
     if (level.id > unlockedStage + 1) {
       alert("⚠️ 이전 단계를 먼저 클리어하십시오.");
       return;
     }
 
-    // 4. 사용자 입력 받기
-    const input = prompt('[SYSTEM] ${level.title} 접근 권한이 필요합니다.\n비밀번호(Flag)를 입력하십시오:');
+    // 4. Flag 입력 및 검증
+    const input = prompt(`[SYSTEM] ${level.title} 접근 권한이 필요합니다.\n비밀번호(Flag)를 입력하십시오:`);
 
     if (input) {
       try {
@@ -56,11 +60,13 @@ function StartPage() {
         });
 
         if (!response.ok) {
-            throw new Error('API 요청 실패 (주소를 확인하세요)');
+            throw new Error('API 요청 실패');
         }
 
         const data = await response.json();
-        if (input === data[level.id - 2].password) {
+        
+        // 데이터 구조에 맞춰 비밀번호 검증 (level 1 -> data[0]이 아님 주의, 로직 유지)
+        if (data[level.id - 2] && input === data[level.id - 2].password) {
           alert("ACCESS GRANTED. 승인되었습니다.");
           setUnlockedStage(level.id);
         } else {
@@ -69,71 +75,91 @@ function StartPage() {
 
       } catch (error) {
         console.error("Error:", error);
-        alert("⚠️ 서버 연결 오류: API 주소가 올바른지 확인해주세요.");
+        alert("⚠️ 서버 연결 오류: API 주소를 확인해주세요.");
       }
     }
   };
 
   return (
-    <div className="terminal-container">
-      <div className="overlay-scanline"></div>
-      
-      <header className="terminal-header">
-        <p className="system-log">
-          &gt; SYSTEM_BOOT_SEQUENCE_INIT... OK<br/>
-          &gt; CONNECTING_TO_AUTH_SERVER... ESTABLISHED<br/>
-          &gt; CURRENT_ACCESS_LEVEL: {unlockedStage} / 3
-        </p>
-        <h1 className="glitch-title" data-text="CYBER WARGAME">CYBER WARGAME</h1>
-        <p className="sub-title">/// TARGET_SELECTION_REQUIRED ///</p>
-      </header>
+    <>
+      {/* ⚡️ [핵심 수정] 네비게이션을 컨테이너 밖으로 완전히 분리했습니다. */}
+      {/* 이렇게 하면 아래 terminal-container의 중앙 정렬 영향을 받지 않습니다. */}
+      <div className="top-nav">
+        {user ? (
+          <button onClick={logout} className="nav-btn logout">
+            LOGOUT
+          </button>
+        ) : (
+          <>
+            <Link to="/login" className="nav-btn">
+              LOGIN
+            </Link>
+            <Link to="/signup" className="nav-btn signup">
+              SIGN UP
+            </Link>
+          </>
+        )}
+      </div>
 
-      <main className="grid-container">
-        {gameLevels.map((level) => {
-          const isLocked = level.id > unlockedStage;
+      <div className="terminal-container">
+        <div className="overlay-scanline"></div>
+        
+        <header className="terminal-header">
+          <p className="system-log">
+            &gt; SYSTEM_BOOT_SEQUENCE_INIT... OK<br/>
+            &gt; CONNECTING_TO_AUTH_SERVER... ESTABLISHED<br/>
+            &gt; USER_IDENTITY: {user ? user.name : "GUEST_USER"}<br/>
+            &gt; CURRENT_ACCESS_LEVEL: {unlockedStage} / 3
+          </p>
+          <h1 className="glitch-title" data-text="CYBER WARGAME">CYBER WARGAME</h1>
+          <p className="sub-title">/// TARGET_SELECTION_REQUIRED ///</p>
+        </header>
 
-          return (
-            <a 
-              key={level.id} 
-              href={level.url} 
-              className={`hacker-card ${isLocked ? 'locked' : ''}`}
-              onClick={(e) => handleCardClick(e, level)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div className="card-header">
-                <span className={`status-dot ${isLocked ? 'red' : 'green'}`}></span>
-                <span className="code-name">
-                  {isLocked ? "ACCESS_DENIED" : `Target: ${level.code}`}
-                </span>
-              </div>
-              
-              <div className="card-body">
-                <h2 className="level-title">
-                  {isLocked ? "LOCKED" : level.title}
-                </h2>
-                <div className="separator"></div>
-                {isLocked ? (
-                  <div className="lock-icon">🔒 RESTRICTED AREA</div>
-                ) : (
-                  <>
-                    <h3 className="level-subtitle">[{level.subtitle}]</h3>
-                    <p className="level-desc">&gt; {level.description}</p>
-                  </>
-                )}
-              </div>
+        <main className="grid-container">
+          {gameLevels.map((level) => {
+            const isLocked = level.id > unlockedStage;
 
-              <div className="card-footer">
-                <span className="execute-cmd">
-                  {isLocked ? "./auth_request.sh" : "./execute_exploit.sh"}
-                </span>
-                <span className="blinking-cursor">_</span>
-              </div>
-            </a>
-          );
-        })}
-      </main>
-    </div>
+            return (
+              <a 
+                key={level.id} 
+                href={level.url} 
+                className={`hacker-card ${isLocked ? 'locked' : ''}`}
+                onClick={(e) => handleCardClick(e, level)}
+              >
+                <div className="card-header">
+                  <span className={`status-dot ${isLocked ? 'red' : 'green'}`}></span>
+                  <span className="code-name">
+                    {isLocked ? "ACCESS_DENIED" : `Target: ${level.code}`}
+                  </span>
+                </div>
+                
+                <div className="card-body">
+                  <h2 className="level-title">
+                    {isLocked ? "LOCKED" : level.title}
+                  </h2>
+                  <div className="separator"></div>
+                  {isLocked ? (
+                    <div className="lock-icon">🔒 RESTRICTED AREA</div>
+                  ) : (
+                    <>
+                      <h3 className="level-subtitle">[{level.subtitle}]</h3>
+                      <p className="level-desc">&gt; {level.description}</p>
+                    </>
+                  )}
+                </div>
+
+                <div className="card-footer">
+                  <span className="execute-cmd">
+                    {isLocked ? "./auth_request.sh" : "./execute_exploit.sh"}
+                  </span>
+                  <span className="blinking-cursor">_</span>
+                </div>
+              </a>
+            );
+          })}
+        </main>
+      </div>
+    </>
   );
 }
 

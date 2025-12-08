@@ -1,258 +1,232 @@
 :root {
-    --bg-color: #050505;
-    --terminal-green: #00ff41;
-    --terminal-dim: #008F11;
-    --alert-red: #ff003c;
-    --font-mono: 'Courier New', Courier, monospace;
-  }
-  
-  body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; /* 패딩이 너비에 포함되도록 설정 */
-    background-color: var(--bg-color);
-  }
-  
-  /* 2. 전체 컨테이너: 화면 정중앙 배치 */
-  .terminal-container {
-    width: 100%;       /* 너비를 화면 꽉 차게 */
-    min-height: 100vh; /* 높이도 화면 꽉 차게 */
-    display: flex;
-    flex-direction: column;
-    align-items: center;     /* 가로 중앙 정렬 (핵심) */
-    justify-content: center; /* 세로 중앙 정렬 */
-    position: relative;
-    box-sizing: border-box;
-    padding: 2rem;
-    overflow-x: hidden; /* 가로 스크롤 방지 */
-  }
-  
-  /* CRT 모니터 효과 */
-  .overlay-scanline {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(
-      to bottom,
-      rgba(255,255,255,0),
-      rgba(255,255,255,0) 50%,
-      rgba(0,0,0,0.2) 50%,
-      rgba(0,0,0,0.2)
-    );
-    background-size: 100% 4px;
-    pointer-events: none;
-    z-index: 10;
-  }
-  
-  /* 헤더 영역 중앙 정렬 */
-  .terminal-header {
-    text-align: center; /* 텍스트 중앙 정렬 */
-    margin-bottom: 4rem;
-    width: 100%;
-    max-width: 1000px;
-    display: flex;        /* 내부 요소 정렬을 위해 flex 사용 */
-    flex-direction: column;
-    align-items: center;  /* 내부 요소 가로 중앙 정렬 */
-  }
-  
-  .system-log {
-    color: var(--terminal-dim);
-    font-size: 0.8rem;
-    text-align: left; /* 로그는 왼쪽 정렬이 간지 */
-    width: 100%;      /* 대신 부모 너비만큼 차지 */
-    max-width: 600px; /* 너무 넓게 퍼지지 않도록 제한 */
-    margin-bottom: 1rem;
-    border-bottom: 1px dashed var(--terminal-dim);
-    padding-bottom: 1rem;
-  }
-  
-  .glitch-title {
-    font-family: var(--font-mono);
-    font-size: 4rem;
-    font-weight: bold;
-    margin: 0;
-    color: var(--terminal-green);
-    text-shadow: 0 0 10px var(--terminal-green);
-    letter-spacing: -2px;
-    text-align: center;
-  }
-  
-  .sub-title {
-    color: var(--terminal-green);
-    background-color: var(--bg-color);
-    display: inline-block;
-    padding: 0.2rem 1rem;
-    margin-top: 1rem;
-    border: 1px solid var(--terminal-green);
-    font-size: 1.2rem;
-    font-family: var(--font-mono);
-  }
-  
-  /* 3. 카드 그리드 컨테이너: 카드들을 중앙으로 모으기 */
-  .grid-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center; /* 카드들이 화면 중앙에 모이도록 설정 (핵심) */
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    z-index: 1;
-  }
-  
-  /* 해커 카드 스타일 */
-  .hacker-card {
-    text-decoration: none;
-    background-color: rgba(0, 20, 0, 0.9);
-    border: 1px solid var(--terminal-dim);
-    width: 320px;
-    padding: 1.5rem;
-    position: relative;
-    transition: all 0.2s ease;
-    color: var(--terminal-green);
-    box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
-    display: flex;           /* 내용물 정렬 */
-    flex-direction: column;
-  }
-  
-  .hacker-card:hover {
-    background-color: var(--terminal-green);
-    color: var(--bg-color);
-    box-shadow: 0 0 20px var(--terminal-green);
-    transform: scale(1.02);
-    border-color: var(--bg-color);
-  }
-  
-  /* 호버 시 텍스트 색상 변경 */
-  .hacker-card:hover .system-log,
-  .hacker-card:hover .level-desc,
-  .hacker-card:hover .code-name,
-  .hacker-card:hover .card-header {
-    color: var(--bg-color);
-  }
-  
-  .hacker-card:hover .separator {
-    background-color: var(--bg-color);
-  }
-  
-  /* 카드 내부 요소 */
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.8rem;
-    margin-bottom: 1rem;
-    color: var(--terminal-dim);
-    font-family: var(--font-mono);
-  }
-  
-  .status-dot {
-    width: 10px;
-    height: 10px;
-    background-color: var(--alert-red);
-    border-radius: 50%;
-    box-shadow: 0 0 5px var(--alert-red);
-    animation: blink 2s infinite;
-  }
-  
-  .code-name {
-    font-family: var(--font-mono);
-  }
-  
-  .level-title {
-    font-size: 1.8rem;
-    margin: 0;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-family: var(--font-mono);
-  }
-  
-  .separator {
-    height: 2px;
-    background-color: var(--terminal-dim);
-    width: 100%;
-    margin: 10px 0;
-  }
-  
-  .level-subtitle {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    font-weight: normal;
-    font-family: var(--font-mono);
-  }
-  
-  .level-desc {
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: #aaa;
-    margin-bottom: 2rem;
-    font-family: var(--font-mono);
-  }
-  
-  .card-footer {
-    font-weight: bold;
-    font-size: 1rem;
-    border-top: 1px solid transparent;
-    padding-top: 1rem;
-    text-align: right;
-    margin-top: auto; /* 하단 고정 */
-    font-family: var(--font-mono);
-  }
-  
-  .blinking-cursor {
-    animation: blink 1s step-end infinite;
-  }
-  
-  @keyframes blink {
-    50% { opacity: 0; }
-  }
-  
-  @media (max-width: 768px) {
-    .glitch-title { font-size: 2.5rem; }
-    .hacker-card { width: 100%; }
-  }
+  --bg-color: #f3f4f6;           
+  --text-main: #111827;          
+  --text-sub: #6b7280;           
+  --accent-color: #2563eb;       
+  --card-bg: #ffffff;            
+  --danger-color: #ef4444;       
+  --font-tech: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-mono: 'Courier New', Courier, monospace;
+}
 
-  .hacker-card.locked {
-    background-color: rgba(20, 0, 0, 0.6); /* 붉은 끼가 도는 어두운 색 */
-    border-color: #333;
-    color: #555;
-    cursor: not-allowed; /* 금지 커서 */
-    filter: grayscale(0.8); /* 회색조 처리 */
-  }
+/* 1. 기본 설정 */
+html, body, #root {
+  margin: 0; padding: 0;
+  width: 100%; height: 100%;
+  background-color: var(--bg-color);
+  font-family: var(--font-tech);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+/* 2. 메인 컨테이너 */
+.terminal-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
+  position: relative;
   
-  /* 잠긴 카드는 호버해도 초록색이 되지 않고 붉은 경고 느낌 */
-  .hacker-card.locked:hover {
-    background-color: rgba(50, 0, 0, 0.8);
-    border-color: var(--alert-red);
-    color: var(--alert-red);
-    transform: none; /* 크기 커짐 효과 제거 */
-    box-shadow: 0 0 10px rgba(255, 0, 60, 0.2);
+  /* 배경 패턴 */
+  background-image: 
+    linear-gradient(#e5e7eb 1px, transparent 1px),
+    linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* 3. 헤더 및 텍스트 */
+.terminal-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.system-log {
+  background-color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-sub);
+  border-left: 5px solid var(--accent-color);
+  margin-bottom: 2rem;
+  text-align: left;
+  display: inline-block;
+  line-height: 1.5;
+}
+
+.glitch-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--text-main);
+  margin: 0;
+  letter-spacing: -2px;
+}
+
+.sub-title {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-top: 10px;
+}
+
+/* 4. 그리드 카드 영역 */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.hacker-card {
+  width: 100%; 
+  min-height: 320px;
+  background-color: var(--card-bg);
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 2rem;
+  text-decoration: none; /* 기본 링크 밑줄 제거 */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.hacker-card:not(.locked):hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.2);
+  border-color: var(--accent-color);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--text-sub);
+}
+
+.status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.status-dot.green { background-color: #10b981; box-shadow: 0 0 0 2px #d1fae5; }
+.status-dot.red { background-color: var(--danger-color); }
+
+.level-title {
+  color: var(--text-main);
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+}
+.hacker-card:not(.locked):hover .level-title { color: var(--accent-color); }
+
+.separator { height: 2px; background-color: #f3f4f6; margin: 1rem 0; width: 100%; }
+.level-subtitle { color: var(--accent-color); font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; }
+.level-desc { color: var(--text-sub); font-size: 0.95rem; line-height: 1.6; margin-bottom: 2rem; }
+.card-footer { margin-top: auto; text-align: right; }
+
+.execute-cmd {
+  background-color: #f3f4f6;
+  color: var(--text-main);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: bold;
+  transition: 0.2s;
+}
+.hacker-card:not(.locked):hover .execute-cmd { background-color: var(--accent-color); color: white; }
+
+/* 잠긴 카드 스타일 */
+.hacker-card.locked {
+  background-color: #f9fafb;
+  border: 1px dashed #d1d5db;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.hacker-card.locked .level-title,
+.hacker-card.locked .level-subtitle,
+.hacker-card.locked .level-desc { color: #9ca3af; }
+.hacker-card.locked .status-dot.red { background-color: #d1d5db; box-shadow: none; }
+.lock-icon { font-size: 1.2rem; color: #9ca3af; text-align: center; margin: 2rem 0; font-weight: bold; }
+.hacker-card.locked:hover { background-color: #fef2f2; border-color: var(--danger-color); }
+.hacker-card.locked:hover .lock-icon { color: var(--danger-color); }
+
+/* 5. 미디어 쿼리 (닫는 괄호 확인 필수!) */
+@media (max-width: 1024px) {
+  .grid-container {
+    grid-template-columns: 1fr;
   }
-  
-  /* 잠겨있을 때 내부 텍스트 색상 제어 */
-  .hacker-card.locked:hover .level-title,
-  .hacker-card.locked:hover .card-footer,
-  .hacker-card.locked:hover .lock-icon {
-    color: var(--alert-red);
+  .glitch-title {
+    font-size: 2.5rem;
   }
-  
-  /* 상태 점 (Dot) 색상 */
-  .status-dot.green {
-    background-color: var(--terminal-green);
-    box-shadow: 0 0 5px var(--terminal-green);
-  }
-  
-  .status-dot.red {
-    background-color: var(--alert-red);
-    box-shadow: 0 0 5px var(--alert-red);
-    animation: none; /* 잠긴 건 깜빡이지 않음 */
-  }
-  
-  /* 잠금 아이콘 영역 */
-  .lock-icon {
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-align: center;
-    margin: 2rem 0;
-    color: #555;
-    font-family: var(--font-mono);
-  }
+} 
+/* ⬆️ 여기가 중요합니다. 이 닫는 괄호 '}'가 없으면 아래 코드는 무시됩니다. */
+
+
+/* 6. ⚡️ 네비게이션 버튼 (여기가 적용 안되던 부분) */
+.top-nav {
+  position: fixed !important; /* 강제 적용 */
+  top: 25px;
+  right: 30px;
+  display: flex;
+  gap: 15px;      /* 버튼 사이 간격 */
+  z-index: 9999;
+}
+
+.nav-btn {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 2px solid #2563eb;
+  color: #2563eb;
+  padding: 8px 24px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none; /* 밑줄 제거 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.nav-btn:hover {
+  background-color: #2563eb;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* 회원가입 버튼 */
+.nav-btn.signup {
+  background-color: #2563eb;
+  color: white;
+}
+.nav-btn.signup:hover {
+  background-color: #1d4ed8;
+}
+
+/* 로그아웃 버튼 */
+.nav-btn.logout {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+.nav-btn.logout:hover {
+  background-color: #ef4444;
+  color: white;
+}

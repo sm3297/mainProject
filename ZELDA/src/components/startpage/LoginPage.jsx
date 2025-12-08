@@ -1,62 +1,74 @@
-// LoginPage.js
+// src/components/startpage/LoginPage.jsx
 import React, { useState } from 'react';
-import { loginAPI } from './MockApi';
-import './Auth.css'
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext'; // 훅 가져오기
+import { loginAPI } from './MockApi'; // 파일명 대소문자 확인 (mockApi.js인지 MockApi.js인지)
+import './Auth.css';
 
-const LoginPage = ({ onLoginSuccess, onSwitchToSignup }) => {
+const LoginPage = () => {
+  const navigate = useNavigate();
+  const { login } = useAuth(); // AuthContext에서 login 함수 가져오기
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    setError('');
+    setError(''); // 기존 에러 초기화
 
     try {
       const response = await loginAPI(email, password);
-      console.log('로그인 성공:', response);
-      onLoginSuccess(response.user);
+      
+      // 1. 전역 상태에 로그인 정보 업데이트
+      login(response.user); 
+      
+      // 2. 메인 페이지로 이동
+      navigate('/'); 
+      
     } catch (err) {
       setError(err.message);
-    } finally {
-      setIsLoading(false);
     }
   };
 
   return (
-    <div className="auth-form-container">
-      <h2>로그인</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="input-group">
-          <label>이메일</label>
-          <input 
-            type="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-            required 
-          />
-        </div>
-        <div className="input-group">
-          <label>비밀번호</label>
-          <input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            required 
-          />
-        </div>
+    <div className="auth-wrapper">
+      <div className="auth-form-container">
+        <h2>로그인</h2>
         
-        {error && <p className="error-msg">{error}</p>}
-        
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? '확인 중...' : '로그인'}
-        </button>
-      </form>
-      <p className="switch-text">
-        계정이 없으신가요? <span onClick={onSwitchToSignup}>회원가입</span>
-      </p>
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label htmlFor="email">이메일</label>
+            <input 
+              type="email" 
+              id="email"
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+              placeholder="example@email.com"
+              required 
+            />
+          </div>
+          
+          <div className="input-group">
+            <label htmlFor="password">비밀번호</label>
+            <input 
+              type="password" 
+              id="password"
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+              placeholder="비밀번호 입력"
+              required 
+            />
+          </div>
+          {error && <p className="error-msg">{error}</p>}
+          
+          <button type="submit">로그인</button>
+        </form>
+
+
+        <p className="switch-text">
+          계정이 없으신가요? <span onClick={() => navigate('/signup')}>회원가입</span>
+        </p>
+      </div>
     </div>
   );
 };

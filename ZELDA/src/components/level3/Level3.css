@@ -1,145 +1,435 @@
-/* src/pages/level3/Level3.css */
+/* src/Level3.css */
 
-/* 전체 배경 (Dark Mode) */
-.bank-body {
-  background-color: #111827; /* Deep Dark */
-  color: #f3f4f6;
+/* =========================================
+   [Part 1] 이론/학습 페이지 스타일 (Theory)
+   ========================================= */
+:root {
+  --primary-color: #2563eb;       
+  --bg-body: #f8fafc;             
+  --bg-panel: #ffffff;            
+  --border-color: #e2e8f0;        
+  --text-main: #1e293b;
+  --text-sub: #64748b;
+}
+
+body {
+  margin: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-body);
+  color: var(--text-main);
+}
+
+/* 상단 헤더 */
+.hacking-header {
+  background-color: var(--bg-panel);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 30px;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* 전체 레이아웃 */
+.theory-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - 60px);
+}
+
+/* 사이드바 */
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background-color: var(--bg-panel);
+  border-right: 1px solid var(--border-color);
+  position: sticky;
+  top: 60px;
+  height: calc(100vh - 60px);
+  padding: 25px 15px;
+  box-sizing: border-box;
+}
+
+.sidebar-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #94a3b8;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.sidebar-list { list-style: none; padding: 0; margin: 0; }
+
+.sidebar-link {
+  display: block;
+  text-decoration: none;
+  color: var(--text-sub);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-bottom: 2px;
+  cursor: pointer;
+}
+.sidebar-link:hover { background-color: var(--bg-body); color: var(--primary-color); }
+.sidebar-link.active {
+  background-color: #eff6ff;
+  color: var(--primary-color);
+  font-weight: 600;
+  border-left: 3px solid var(--primary-color);
+}
+
+/* 본문 영역 */
+.content-panel {
+  flex-grow: 1;
+  padding: 40px 60px;
+  background-color: var(--bg-panel);
+}
+
+.section-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; }
+.section-desc { color: var(--text-sub); margin-bottom: 30px; }
+
+.sub-title1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 40px;
+  margin-bottom: 15px;
+  display: flex; align-items: center;
+}
+.sub-title1::before {
+  content: ''; display: inline-block; width: 4px; height: 18px;
+  background-color: var(--primary-color); margin-right: 10px; border-radius: 2px;
+}
+
+.text-body { font-size: 0.95rem; line-height: 1.7; margin-bottom: 15px; }
+
+/* 박스 스타일들 */
+.info-box {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.practice-box {
+  background-color: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 25px;
+  margin: 25px 0;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+
+.game-btn-sidebar, .btn-action {
+  background-color: #1e293b;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  text-align: center;
+}
+.game-btn-sidebar { display: block; margin-top: 20px; padding: 10px; font-size: 0.9rem; }
+.btn-action { display: inline-block; padding: 12px 30px; background-color: var(--primary-color); }
+
+
+/* =========================================
+   [Part 2] 실전 게임 페이지 스타일 (Game)
+   - Shield Bank Blue Theme
+   ========================================= */
+
+.game-container-l3 {
   min-height: 100vh;
-  font-family: 'Inter', -apple-system, sans-serif;
+  background-color: #f1f5f9;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* 중앙 카드 디자인 */
-.bank-card {
-  background: #1f2937;
-  border: 1px solid #374151;
-  border-radius: 16px;
-  width: 400px;
-  padding: 40px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-/* 상단 골드 라인 포인트 */
-.bank-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
+.dashboard-card-l3 {
+  background: white;
   width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, #d4af37, #fcd34d, #d4af37);
+  max-width: 650px;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
 }
 
-.bank-logo {
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: #fcd34d; /* Gold Color */
-  margin-bottom: 5px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+/* 은행 헤더 */
+.bank-header-l3 {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
 }
 
-.bank-subtitle {
-  font-size: 0.8rem;
-  color: #9ca3af;
+.admin-tag-l3 {
+  background: rgba(255,255,255,0.2);
+  font-size: 0.7rem; padding: 3px 10px; border-radius: 20px; margin-left: 10px;
+}
+
+.view-source-btn-l3 {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white; padding: 8px 15px; border-radius: 6px; cursor: pointer;
+}
+.view-source-btn-l3:hover { background: rgba(255,255,255,0.25); }
+
+/* 은행 컨텐츠 */
+.bank-content-l3 { padding: 30px; }
+
+.user-profile-l3 {
+  display: flex; align-items: center; gap: 15px; margin-bottom: 25px;
+}
+.avatar-l3 {
+  width: 50px; height: 50px; background: #eff6ff; border-radius: 50%;
+  display: flex; justify-content: center; align-items: center; font-size: 1.5rem;
+}
+
+/* 보안 상태창 */
+.security-status-l3 {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.status-item-l3 {
+  display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.95rem;
+}
+.value-l3.medium { color: #d97706; background: #fffbeb; padding: 2px 8px; border-radius: 4px; font-weight: bold; }
+.value-l3.password { color: #dc2626; background: #fef2f2; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-family: monospace; }
+
+/* 숨겨진 폼 (Elements 탭에서만 보임) */
+.hidden-security-form { display: none; }
+
+/* 소스코드 모달 */
+.modal-overlay-l3 {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6); backdrop-filter: blur(3px);
+  display: flex; justify-content: center; align-items: center; z-index: 200;
+}
+.modal-box-l3 {
+  background: #1e1e1e; width: 90%; max-width: 700px;
+  border-radius: 10px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+.modal-top-l3 {
+  background: #2d2d2d; padding: 10px 20px; color: #9cdcfe;
+  display: flex; justify-content: space-between;
+}
+.code-block-l3 {
+  padding: 20px; color: #d4d4d4; font-family: 'Consolas', monospace; font-size: 14px; margin: 0; overflow-x: auto;
+}
+
+.sim-exit-btn {
+  position: fixed; bottom: 20px; right: 20px;
+  background: #333; color: white; padding: 10px 20px; border-radius: 30px;
+  text-decoration: none; font-size: 0.8rem; opacity: 0.8;
+}
+
+
+
+
+
+
+
+
+/* Level3Game.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+.game-container {
+  min-height: 100vh;
+  background-color: #f0f4f8; /* 아주 연한 쿨그레이 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  color: #334155;
+  margin: 0;
+  padding: 0;
+}
+
+/* 대시보드 카드 디자인 */
+.dashboard-card {
+  background: white;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+/* 헤더 */
+.bank-header {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8); /* 선명한 블루 */
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.logo-area h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-tag {
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-weight: 600;
+}
+
+.view-source-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.view-source-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 컨텐츠 영역 */
+.bank-content {
+  padding: 30px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
   margin-bottom: 30px;
 }
 
-/* 사용자 정보 박스 */
-.user-info-box {
-  background-color: #111827;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 25px;
-  border: 1px solid #374151;
+.avatar {
+  width: 50px;
+  height: 50px;
+  background: #eff6ff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
 }
 
-.info-row {
+.info h3 { margin: 0; font-size: 1.1rem; color: #1e293b; }
+.info .role { margin: 0; font-size: 0.85rem; color: #64748b; }
+
+.security-status {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 25px;
+}
+
+.status-item {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
-  font-size: 0.9rem;
-  color: #d1d5db;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
 }
 
-.info-val { font-weight: bold; color: #fff; }
+.status-item:last-child { margin-bottom: 0; }
 
-/* 등급 뱃지 */
-.role-badge { 
-  background: #374151; 
-  color: #9ca3af; 
+.value.low { color: #ea580c; font-weight: 600; background: #fff7ed; padding: 2px 8px; border-radius: 4px; }
+.value.password { color: #dc2626; font-family: 'Monaco', monospace; font-weight: 700; background: #fef2f2; padding: 2px 8px; border-radius: 4px; }
+
+.system-message {
+  background: #eff6ff;
+  border-left: 4px solid #3b82f6;
+  padding: 15px;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+  color: #1e40af;
+}
+
+/* 모달창 */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(2px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal-box {
+  background: #1e1e1e;
+  width: 90%;
+  max-width: 700px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.modal-top {
+  background: #2d2d2d;
+  padding: 12px 20px;
+  color: #9cdcfe;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333;
+}
+
+.modal-top button {
+  background: none; border: none; color: #fff; cursor: pointer; font-size: 1.2rem;
+}
+
+.code-block {
+  padding: 20px;
+  color: #d4d4d4;
+  font-family: 'Consolas', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: auto;
+  margin: 0;
+}
+
+
+/* ... (이전 CSS와 대부분 동일하지만, 보안 등급 색상 변경) ... */
+
+/* Medium Level 스타일 */
+.value.medium { 
+  color: #d97706; /* 오렌지색 */
+  font-weight: 600; 
+  background: #fffbeb; 
   padding: 2px 8px; 
   border-radius: 4px; 
-  font-size: 0.8rem; 
 }
 
-/* VIP 해킹 성공 시 스타일 */
-.role-badge.vip {
-  background: linear-gradient(135deg, #d4af37, #f59e0b);
-  color: #111;
-  font-weight: bold;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-}
-
-/* 입장 버튼 */
-.vault-btn {
-  width: 100%;
-  padding: 15px;
-  background-color: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.vault-btn:hover { background-color: #1d4ed8; }
-
-/* 성공 Flag 박스 */
-.bank-secret {
-  margin-top: 25px;
-  padding: 15px;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid #059669;
-  color: #34d399;
-  border-radius: 8px;
-  font-family: 'Courier New', monospace;
-  font-weight: bold;
-  word-break: break-all;
-}
-
-/* 힌트 버튼 스타일 */
-.hint-toggle {
-  background: none;
-  border: none;
-  color: #4b5563;
-  font-size: 0.8rem;
-  margin-top: 20px;
-  cursor: pointer;
-  text-decoration: underline;
-}
-.hint-toggle:hover { color: #9ca3af; }
-
-.hint-box {
-  margin-top: 10px;
-  font-size: 0.8rem;
-  color: #6b7280;
-  background: #111;
-  padding: 10px;
-  border-radius: 4px;
-  text-align: left;
-  line-height: 1.5;
-}
-
-/* 나가기 링크 */
-.exit-link {
-    color: #6b7280;
-    text-decoration: none;
+/* 힌트 메시지 스타일 */
+.hint {
     font-size: 0.8rem;
+    color: #94a3b8;
+    margin-top: 5px;
+}
+
+/* 숨겨진 폼 (실제로는 hidden이라 안 보이지만, DOM에는 존재함) */
+.hidden-security-form {
+    display: none; 
+    /* display:none 이어도 F12 Elements 탭에서는 보임. 이것이 해킹 포인트! */
 }

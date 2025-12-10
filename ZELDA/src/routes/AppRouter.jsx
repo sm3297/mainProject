@@ -3,19 +3,19 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext'; // 위에서 만든 훅 가져오기
 
 // 페이지들 임포트
-import StartPage from '../components/startpage/StartPage';
-import LoginPage from '../components/startpage/LoginPage';
-import SignupPage from '../components/startpage/SignupPage';
+import StartPage from '../pages/startpage/StartPage';
+import LoginPage from '../pages/startpage/LoginPage';
+import SignupPage from '../pages/startpage/SignupPage';
 
 
 // 게임 페이지들
-import Level1 from '../components/level1/Level1';
-import Level2 from '../components/level2/Level2'
-import Level3 from '../components/level3/Level3'
-import Level1Game from '../components/level1/Level1Game';
-import Level2Game from '../components/level2/Level2Game'
-import Level3Game from '../components/level3/Level3Game' 
-import AdminPage from '../components/level1/AdminPage'
+import Level1 from '../pages/level1/Level1';
+import Level2 from '../pages/level2/Level2'
+import Level3 from '../pages/level3/Level3'
+import Level1Game from '../pages/level1/Level1Game';
+import Level2Game from '../pages/level2/Level2Game'
+import Level3Game from '../pages/level3/Level3Game' 
+import AdminPage from '../pages/level1/AdminPage'
 
 
 const AppRouter = () => {

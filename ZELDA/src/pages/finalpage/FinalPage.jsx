@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 // ✅ [중요] 아이콘 패키지 임포트 (에러 해결됨)
-import { Trophy, Send, Trash2, Edit2, Save, X, MessageSquare, ShieldCheck } from 'lucide-react';
 import './FinalPage.css';
 
 // ⚠️ 본인의 MockAPI 주소로 변경 (제공해주신 주소 적용함)

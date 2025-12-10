@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext } from 'react';
-import { updateUserAPI } from '../components/startpage/MockApi';
+import { updateUserAPI } from '../pages/startpage/MockApi';
 
 const AuthContext = createContext(null);
 

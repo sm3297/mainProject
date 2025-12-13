@@ -123,13 +123,14 @@ function StartPage() {
         <div className="overlay-scanline"></div>
         
         <header className="terminal-header">
+        <h1 className="glitch-title" data-text="CYBER WARGAME">CYBER WARGAME</h1>
           <p className="system-log">
             &gt; SYSTEM_BOOT_SEQUENCE_INIT... OK<br/>
             &gt; CONNECTING_TO_AUTH_SERVER... ESTABLISHED<br/>
             &gt; USER_IDENTITY: {user ? user.name : "GUEST_USER"}<br/>
-            &gt; CURRENT_ACCESS_LEVEL: {unlockedStage} / 3
+            &gt; CURRENT_ACCESS_LEVEL: {unlockedStage} / 
           </p>
-          <h1 className="glitch-title" data-text="CYBER WARGAME">CYBER WARGAME</h1>
+          <br/>
           <p className="sub-title">/// TARGET_SELECTION_REQUIRED ///</p>
         </header>
 

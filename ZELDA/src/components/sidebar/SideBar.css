@@ -2,8 +2,8 @@
     width: 240px;
     flex-shrink: 0;
     position: sticky;
-    top: 80px;
-    height: calc(100vh - 80px);
+    top: 60px;
+    height: calc(100vh - 60px);
     padding: 20px;
     border-right: 1px solid var(--border-color);
     background: white;

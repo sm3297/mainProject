@@ -25,8 +25,6 @@ function Level3() {
     // 스크롤 핸들러
     const handleNavClick = (sectionId) => {
         setActiveSection(sectionId);
-        const element = document.getElementById(sectionId);
-        if (element) element.scrollIntoView({ behavior: 'smooth' });
     };
 
     // [함정] 악성 링크 클릭 (상태 변조)

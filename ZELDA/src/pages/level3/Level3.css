@@ -31,7 +31,8 @@ body {
     flex: 1; 
     padding: 40px 60px; 
     background: white; 
-    min-height: 100vh;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
     border-radius: 12px 0 0 12px;
     box-shadow: -5px 0 15px rgba(0,0,0,0.03);
 }

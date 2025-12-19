@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Level1.css';
 import Header from '../../components/header/Header.jsx';
+import SideBar from '../../components/sidebar/SideBar.jsx';
 import { useAuth } from '../../context/AuthContext';
 
 function Level1() { 
@@ -9,7 +10,12 @@ function Level1() {
     const [simUsername, setSimUsername] = useState('');
     const [simPassword, setSimPassword] = useState('');
     const { user } = useAuth();
-    
+    const curriculumData = [
+        { id: 'intro', title: '01. SQL Injection이란?' },
+        { id: 'mechanism', title: '02. 공격 원리 분석 (핵심)' },
+        { id: 'simulation', title: '03. 실시간 쿼리 시뮬레이터' },
+        { id: 'defense', title: '04. 올바른 방어법' },
+      ];
     // 주석 감지
     const isCommented = simUsername.includes('--') || simUsername.includes('#');
 
@@ -23,34 +29,9 @@ function Level1() {
             <Header level={1} user={user} />
             
             <div className="theory-container">
-                
-                {/* [왼쪽] 사이드바 */}
-                <aside className="sidebar">
-                    <div className="sidebar-title">Curriculum</div>
-                    <ul className="sidebar-list">
-                        <li>
-                            <a href="#intro" className={`sidebar-link ${activeSection === 'intro' ? 'active' : ''}`} onClick={() => handleNavClick('intro')}>
-                                01. SQL Injection이란?
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#mechanism" className={`sidebar-link ${activeSection === 'mechanism' ? 'active' : ''}`} onClick={() => handleNavClick('mechanism')}>
-                                02. 공격 원리 분석 (핵심)
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#simulation" className={`sidebar-link ${activeSection === 'simulation' ? 'active' : ''}`} onClick={() => handleNavClick('simulation')}>
-                                03. 실시간 쿼리 시뮬레이터
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#defense" className={`sidebar-link ${activeSection === 'defense' ? 'active' : ''}`} onClick={() => handleNavClick('defense')}>
-                                04. 올바른 방어법
-                            </a>
-                        </li>
-                    </ul>
-                    <Link to="/level1Game" className="game-btn-sidebar">실전 해킹 (Game Start)</Link>
-                </aside>
+                {/* [왼쪽] 사이드바 네비게이션 */}
+                <SideBar menuItems={curriculumData} gamePath="/level1Game" activeSection={activeSection} handleNavClick={handleNavClick}/>
+
 
                 {/* [오른쪽] 본문 */}
                 <main className="content-panel">

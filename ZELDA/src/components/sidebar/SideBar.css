@@ -1,0 +1,78 @@
+.sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 80px;
+    height: calc(100vh - 80px);
+    padding: 20px;
+    border-right: 1px solid var(--border-color);
+    background: white;
+    margin-right: 20px;
+  }
+  
+  .sidebar-title {
+    font-weight: 800;
+    color: #94a3b8;
+    margin-bottom: 15px;
+    font-size: 0.8rem;
+  }
+  
+  .sidebar-link {
+    display: block;
+    padding: 10px;
+    color: var(--text-sub);
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+  
+  .sidebar-link:hover,
+  .sidebar-link.active {
+    background: #eff6ff;
+    color: var(--blue-primary);
+    font-weight: 700;
+  }
+  
+  .game-btn-sidebar {
+    display: block;
+    margin-top: 20px;
+    padding: 12px;
+    background: var(--navy-dark);
+    color: white;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+  }
+  
+  /* Level 1 대시보드 내부의 모의 사이드바 (Mock Sidebar) */
+  .mock-sidebar {
+    width: 240px;
+    background-color: #f8fafc;
+    border-right: 1px solid #e2e8f0;
+    padding: 40px 20px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+  }
+  
+  .widget-title {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #94a3b8;
+    margin-bottom: 15px;
+  }
+  
+  .widget-list li a {
+    display: block;
+    padding: 10px 0;
+    color: #64748b;
+    text-decoration: none;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  
+  .widget-list li a:hover {
+    color: var(--blue-primary);
+    font-weight: 700;
+  }

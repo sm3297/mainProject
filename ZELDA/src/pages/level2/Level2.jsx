@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Level2.css';
 import Header from '../../components/header/Header.jsx';
+import SideBar from '../../components/sidebar/SideBar.jsx';
 import { useAuth } from '../../context/AuthContext';
 
 function Level2() { 
@@ -9,6 +10,12 @@ function Level2() {
     const [activeSection, setActiveSection] = useState('intro');
     const [simInput, setSimInput] = useState('');
     const { user } = useAuth();
+    const curriculumData = [
+        { id: 'intro', title: '01. XSS란 무엇인가?' },
+        { id: 'mechanism', title: '02. 공격 원리 및 유형' },
+        { id: 'simulation', title: '03. 실시간 실행 시뮬레이터' },
+        { id: 'defense', title: '04. 올바른 방어법' },
+      ];
     
     // 위험한 스크립트 감지 (간단한 예시: <script>)
     // 실제로는 인코딩되지 않은 <, > 등이 핵심
@@ -30,33 +37,7 @@ function Level2() {
             <div className="theory-container">
                 
                 {/* [왼쪽] 사이드바 */}
-                <aside className="sidebar">
-                    <div className="sidebar-title">Curriculum</div>
-                    <ul className="sidebar-list">
-                        <li>
-                            <a href="#intro" className={`sidebar-link ${activeSection === 'intro' ? 'active' : ''}`} onClick={() => handleNavClick('intro')}>
-                                01. XSS란 무엇인가?
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#mechanism" className={`sidebar-link ${activeSection === 'mechanism' ? 'active' : ''}`} onClick={() => handleNavClick('mechanism')}>
-                                02. 공격 원리 및 유형
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#simulation" className={`sidebar-link ${activeSection === 'simulation' ? 'active' : ''}`} onClick={() => handleNavClick('simulation')}>
-                                03. 실시간 실행 시뮬레이터
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#defense" className={`sidebar-link ${activeSection === 'defense' ? 'active' : ''}`} onClick={() => handleNavClick('defense')}>
-                                04. 올바른 방어법
-                            </a>
-                        </li>
-                    </ul>
-                    {/* Level2Game으로 링크 변경 */}
-                    <Link to="/level2Game" className="game-btn-sidebar">실전 해킹 (Game Start)</Link>
-                </aside>
+                <SideBar menuItems={curriculumData} gamePath="/level2Game" activeSection={activeSection} handleNavClick={handleNavClick}/>
 
                 {/* [오른쪽] 본문 */}
                 <main className="content-panel">

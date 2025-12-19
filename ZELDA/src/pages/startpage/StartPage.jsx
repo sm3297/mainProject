@@ -14,10 +14,6 @@ const hashString = async (message) => {
 
 function StartPage() {
   const { user, updateLevel } = useAuth(); 
-  
-  // Header 내부에서 처리하므로 StartPage에서는 Modal 관련 상태가 필요 없습니다.
-  // const [isModalOpen, setIsModalOpen] = useState(false);  <-- 삭제됨
-  
   const [unlockedStage, setUnlockedStage] = useState(1);
 
   useEffect(() => {
@@ -40,24 +36,24 @@ function StartPage() {
   const gameLevels = [
     {
       id: 1,
-      code: "L1_BASIC",
-      title: "Level1 : Basic SQL Injection",
+      code: "Level1_BASIC",
+      title: "Basic SQL Injection",
       subtitle: "Web Hacking / Basic SQLi",
       description: "보안이 허술한 웹사이트의 취약점을 찾아 진입하십시오.",
       url: "/level1",
     },
     {                 
       id: 2,
-      code: "L2_STORAGE",      
-      title: "Level2 : Cross-Site Scripting (XSS)",
+      code: "Level2_STORAGE",      
+      title: "Cross-Site Scripting (XSS)",
       subtitle: "Web Storage & Web Crypto API",
       description: "1단계를 클리어하고 얻은 비밀번호(Flag)를 입력하십시오.",
       url: "/level2",
     },
     {
       id: 3,
-      code: "L3_ROOT",
-      title: "Level3 : CSRF & Logic Flaws",
+      code: "Level3_ROOT",
+      title: "CSRF & Logic Flaws",
       subtitle: "CSRF Attack",
       description: "2단계를 클리어하고 얻은 비밀번호(Flag)를 입력하십시오.",
       url: "/level3",

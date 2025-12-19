@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Level3.css';
 import Header from '../../components/header/Header.jsx';
+import SideBar from '../../components/sidebar/SideBar.jsx';
 import { useAuth } from '../../context/AuthContext';
 
-function Level3() { 
 
+function Level3() { 
     // --- 1. 네비게이션 상태 ---
     const [activeSection, setActiveSection] = useState('intro');
     const { user } = useAuth();
@@ -14,6 +15,12 @@ function Level3() {
     const [simState, setSimState] = useState('NORMAL');
     const [simPoints, setSimPoints] = useState(100);    
     const [simLog, setSimLog] = useState("// 대기 중...");
+    const curriculumData = [
+        { id: 'intro', title: '01. CSRF & 로직 결함이란?' },
+        { id: 'mechanism', title: '02. 공격 원리 해부 (핵심)' },
+        { id: 'simulation', title: '03. 상태 변조 시뮬레이터' },
+        { id: 'defense', title: '04. 올바른 방어법' },
+      ];
 
     // 스크롤 핸들러
     const handleNavClick = (sectionId) => {
@@ -53,33 +60,8 @@ function Level3() {
             
             <div className="theory-container">
                 
-                {/* [왼쪽] 사이드바 */}
-                <aside className="sidebar">
-                    <div className="sidebar-title">Curriculum</div>
-                    <ul className="sidebar-list">
-                        <li>
-                            <a href="#intro" className={`sidebar-link ${activeSection === 'intro' ? 'active' : ''}`} onClick={() => handleNavClick('intro')}>
-                                01. CSRF & 로직 결함이란?
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#mechanism" className={`sidebar-link ${activeSection === 'mechanism' ? 'active' : ''}`} onClick={() => handleNavClick('mechanism')}>
-                                02. 공격 원리 해부 (핵심)
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#simulation" className={`sidebar-link ${activeSection === 'simulation' ? 'active' : ''}`} onClick={() => handleNavClick('simulation')}>
-                                03. 상태 변조 시뮬레이터
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#defense" className={`sidebar-link ${activeSection === 'defense' ? 'active' : ''}`} onClick={() => handleNavClick('defense')}>
-                                04. 올바른 방어법
-                            </a>
-                        </li>
-                    </ul>
-                    <Link to="/level3Game" className="game-btn-sidebar">실전 해킹 (Game Start)</Link>
-                </aside>
+                {/* [왼쪽] 사이드바 네비게이션 */}
+               <SideBar menuItems={curriculumData} gamePath="/level3Game" activeSection={activeSection} handleNavClick={handleNavClick}/>
 
                 {/* [오른쪽] 본문 */}
                 <main className="content-panel">

@@ -1,11 +1,4 @@
-/* =========================================
-   StartPage.css
-   - 전역 변수 설정
-   - 터미널/해킹 테마 배경
-   - 게임 레벨 카드 (Grid Layout)
-   ========================================= */
 
-/* 1. Global Variables & Reset */
 :root {
   --bg-color: #f3f4f1;
   --bg-panel: #ffffff;
@@ -42,8 +35,6 @@ body.startpage-body, body.startpage-body #root {
   flex-direction: column;
   align-items: center;
   
-  /* [중요] 헤더(60px) + 여백(60px) = 120px 
-     헤더가 fixed라서 내용이 가려지지 않게 상단 여백을 충분히 줌 */
   padding: 120px 20px 60px 20px; 
   
   box-sizing: border-box;
@@ -145,6 +136,10 @@ body.startpage-body, body.startpage-body #root {
 .status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
 .status-dot.green { background-color: var(--safe-green); box-shadow: 0 0 0 2px #d1fae5; }
 .status-dot.red { background-color: var(--muted-danger); }
+
+.card-body {
+  flex-grow: 1;
+}
 
 /* 카드 내부 텍스트 */
 .hacker-card .level-title { 

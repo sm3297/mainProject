@@ -271,6 +271,18 @@ export default function Level2Game() {
             메모를 선택하여 내용을 확인하세요
           </div>
         )}
+        <div className="mission-console">
+            <div className="console-header">Hacking Flow</div>
+            <div className="console-body">
+                <p>1. 새 메모를 작성하세요. 제목에 아래 XSS 페이로드를 입력하고 저장하세요.</p>
+                <div className="payload-box">
+                    &lt;img src=x onerror="console.log(JSON.stringify(sessionStorage)); this.remove();"&gt;
+                </div>
+                <p>2. 방금 작성한 메모를 클릭하여 내용을 확인하세요.</p>
+                <p>3. 개발자 도구 (F12) Console 탭을 확인하여 세션 키(JWK)를 탈취하세요.</p>
+                <p>4. 탈취한 세션 키로 암호화된 기밀 메모의 잠금을 해제하세요.</p>
+            </div>
+        </div>
         <Link to="/level2" className="sim-exit-btn">🚪 이론으로 돌아가기</Link>
       </div>
 

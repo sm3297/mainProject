@@ -198,7 +198,7 @@ if( isset( $_GET['Change'] ) ) {
 
                         {/* 4. 미션 가이드 */}
                         <div className="bank-section">
-                            <div className="mission-console">
+                            <div className="mission-console1">
                                 <div className="console-header">Hacking Flow</div>
                                 <div className="console-body">
                                     <p>1. 위 view source 버튼을 클릭 후, 소스코드를 분석하세요.</p>

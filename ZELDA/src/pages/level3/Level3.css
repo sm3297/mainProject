@@ -195,12 +195,12 @@ body {
 .status-pill.hacked { background: #fee2e2; color: #991b1b; animation: blink 1.5s infinite; }
 
 /* Mission Console */
-.mission-console {
+.mission-console1 {
     background: #0f172a; border-radius: 12px; padding: 20px; color: #e2e8f0;
 }
-.console-header { color: #fbbf24; font-weight: 700; font-size: 0.9rem; margin-bottom: 15px; border-bottom: 1px solid #334155; padding-bottom: 10px; }
-.console-body p { margin: 5px 0; font-size: 0.85rem; line-height: 1.6; color: #cbd5e1; }
-.payload-box {
+.console-header1 { color: #fbbf24; font-weight: 700; font-size: 0.9rem; margin-bottom: 15px; border-bottom: 1px solid #334155; padding-bottom: 10px; }
+.console-body1 p { margin: 5px 0; font-size: 0.85rem; line-height: 1.6; color: #cbd5e1; }
+.payload-box1 {
     margin-top: 15px; background: #1e293b; border: 1px solid #334155;
     padding: 12px; border-radius: 6px; font-family: 'Courier New', monospace;
     font-size: 0.8rem; color: #a3e635; word-break: break-all;

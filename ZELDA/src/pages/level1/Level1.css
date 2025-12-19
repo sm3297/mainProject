@@ -27,7 +27,8 @@
     flex: 1;
     padding: 40px 60px;
     background: white;
-    min-height: 100vh;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
   }
   
   .section-title {
@@ -39,7 +40,6 @@
   .sub-title1 {
     font-size: 1.4rem;
     font-weight: 700;
-    margin-top: 50px;
     border-left: 4px solid var(--blue-primary);
     padding-left: 15px;
   }

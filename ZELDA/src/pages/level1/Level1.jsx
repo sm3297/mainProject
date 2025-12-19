@@ -57,7 +57,7 @@ function Level1() {
                     </div>
 
                     {/* 2. 원리 분석 (핵심 컨텐츠) */}
-                    <div id="mechanism" style={{ paddingTop: '5px' }}>
+                    <div id="mechanism" style={{ paddingTop: '50px' }}>
                         <h2 className="sub-title1">02. 공격 원리 해부 (Anatomy)</h2>
                         <p className="text-body">
                             가장 유명한 공격 구문인 <span className="code-snippet">' OR 1=1 --</span> 가 도대체 무슨 뜻인지 하나씩 뜯어봅시다.
@@ -84,7 +84,7 @@ function Level1() {
                     </div>
 
                     {/* 3. 시뮬레이터 */}
-                    <div id="simulation" style={{ paddingTop: '5px' }}>
+                    <div id="simulation" style={{ paddingTop: '50px' }}>
                         <h2 className="sub-title1">03. 실시간 쿼리 시뮬레이터</h2>
                         <p className="text-body">
                             설명만 들어서는 감이 안 오시죠? 직접 입력해보세요.
@@ -136,18 +136,42 @@ function Level1() {
                     </div>
 
                     {/* 4. 방어법 */}
-                    <div id="defense" style={{ paddingTop: '5px' }}>
-                        <h2 className="sub-title1">04. 어떻게 막아야 할까요?</h2>
+                    <div id="defense" style={{ paddingTop: '50px', paddingBottom: '5px' }}>
+                        <h2 className="sub-title1">04. 어떻게 막아야 할까요? (Defenses)</h2>
                         <p className="text-body">
-                            해결책은 간단합니다. 사용자의 입력을 '명령어'로 해석하지 않도록 분리하면 됩니다.
-                            이를 <strong>Prepared Statement</strong>라고 합니다.
+                            SQL Injection을 막는 가장 근본적인 방법은 <strong>"입력값과 SQL 쿼리를 분리하는 것"</strong>입니다. 
+                            사용자의 입력이 절대로 SQL 명령의 일부로 해석되지 않도록 막아야 합니다.
                         </p>
+
+                        <h3 className="sub-title2" style={{fontSize: '1.2rem', fontWeight: '700', marginTop: '30px', marginBottom:'10px'}}>1. Prepared Statements (가장 강력한 방어법)</h3>
+                        <p className="text-body">
+                            대부분의 언어와 데이터베이스 프레임워크는 <strong>Prepared Statement (혹은 Parameterized Query)</strong> 기능을 제공합니다.
+                            이 방식은 SQL 쿼리의 '틀'을 먼저 만들고, 사용자의 입력은 나중에 '데이터'로만 전달합니다.
+                            데이터베이스는 이 값을 명령어로 해석하지 않으므로, 악의적인 구문이 실행될 수 없습니다.
+                        </p>
+
                         <div className="query-viewer" style={{ background: '#1e293b', marginTop: '10px' }}>
-                            <span style={{color:'#6a9955'}}>// 안전한 코드 예시 (Node.js)</span><br/>
-                            <span className="sql-kw">const</span> query = <span style={{color:'#ce9178'}}>"SELECT * FROM users WHERE id = ?"</span>;<br/>
-                            <span style={{color:'#6a9955'}}>// 입력값을 쿼리에 붙이지 않고, 별도의 데이터로 전달합니다.</span><br/>
-                            db.execute(query, [inputId]); 
+                            <span style={{color:'#6a9955'}}>// 안전한 코드 예시 (Node.js - mysql2 라이브러리)</span><br/><br/>
+                            <span className="sql-kw">const</span> query = <span style={{color:'#ce9178'}}>"SELECT * FROM users WHERE username = ? AND password = ?"</span>;<br/>
+                            <span style={{color:'#6a9955'}}>// 쿼리 템플릿과 사용자 입력을 명확히 분리하여 전달</span><br/>
+                            <span className="sql-kw">const</span> [rows] = <span className="sql-kw">await</span> db.execute(query, [ <span style={{color:'#ce9178'}}>'admin'</span>, <span style={{color:'#ce9178'}}>'some_password'</span> ]);<br/><br/>
+                            <span style={{color:'#6a9955'}}>// 만약 해커가 username에 ' OR 1=1 -- 를 입력해도...</span><br/>
+                            <span style={{color:'#6a9955'}}>// DB는 그저 이름이 "' OR 1=1 --"인 사용자를 찾으려고만 할 뿐,</span><br/>
+                            <span style={{color:'#6a9955'}}>// SQL 구문이 깨지지 않습니다.</span>
                         </div>
+
+                        <h3 className="sub-title2" style={{fontSize: '1.2rem', fontWeight: '700', marginTop: '40px', marginBottom:'10px'}}>2. 입력값 검증 (Input Validation)</h3>
+                        <p className="text-body">
+                            사용자 입력에 특수문자(' OR -- 등)가 포함되어 있는지 확인하고 필터링하는 것도 보조적인 방어 수단이 될 수 있습니다.
+                            하지만 이 방법은 모든 공격 패턴을 막기 어렵기 때문에(우회 기법 존재), 반드시 Prepared Statement와 함께 사용해야 합니다.
+                        </p>
+                        
+                        <h3 className="sub-title2" style={{fontSize: '1.2rem', fontWeight: '700', marginTop: '40px', marginBottom:'10px'}}>3. 최소 권한의 원칙 (Least Privilege)</h3>
+                        <p className="text-body">
+                            데이터베이스에 연결하는 애플리케이션 계정은 꼭 필요한 권한(읽기, 쓰기 등)만 가져야 합니다.
+                            예를 들어, 웹사이트의 일반적인 게시판은 데이터베이스 전체를 삭제할 수 있는 'DROP' 권한이 필요 없습니다.
+                            이렇게 하면 만에 하나 SQL Injection 공격이 성공하더라도, 피해 범위를 최소화할 수 있습니다.
+                        </p>
                     </div>
 
                     <div style={{ marginTop: '50px', textAlign: 'center' }}>

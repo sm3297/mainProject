@@ -38,7 +38,7 @@ export default function SideBar({ menuItems, gamePath, activeSection, handleNavC
               className={`sidebar-link ${activeSection === item.id ? 'active' : ''}`}
               onClick={(e) => {
                 e.preventDefault(); 
-                document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });
+                document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 handleNavClick(item.id);
               }}
             >

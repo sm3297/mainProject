@@ -41,7 +41,7 @@ function StartPage() {
     {
       id: 1,
       code: "L1_BASIC",
-      title: "Basic SQL Injection",
+      title: "Level1 : Basic SQL Injection",
       subtitle: "Web Hacking / Basic SQLi",
       description: "보안이 허술한 웹사이트의 취약점을 찾아 진입하십시오.",
       url: "/level1",
@@ -49,7 +49,7 @@ function StartPage() {
     {                 
       id: 2,
       code: "L2_STORAGE",      
-      title: "Cross-Site Scripting (XSS)",
+      title: "Level2 : Cross-Site Scripting (XSS)",
       subtitle: "Web Storage & Web Crypto API",
       description: "1단계를 클리어하고 얻은 비밀번호(Flag)를 입력하십시오.",
       url: "/level2",
@@ -57,7 +57,7 @@ function StartPage() {
     {
       id: 3,
       code: "L3_ROOT",
-      title: "CSRF & Logic Flaws",
+      title: "Level3 : CSRF & Logic Flaws",
       subtitle: "CSRF Attack",
       description: "2단계를 클리어하고 얻은 비밀번호(Flag)를 입력하십시오.",
       url: "/level3",

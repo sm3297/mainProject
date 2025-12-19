@@ -154,7 +154,7 @@ function StartPage() {
                   </h2>
                   <div className="separator"></div>
                   {isLocked ? (
-                    <div className="lock-icon">🔒 RESTRICTED AREA</div>
+                    <div className="lock-icon" style={{fontSize:30}}>🔒 RESTRICTED AREA</div>
                   ) : (
                     <>
                       <h3 className="level-subtitle">[{level.subtitle}]</h3>

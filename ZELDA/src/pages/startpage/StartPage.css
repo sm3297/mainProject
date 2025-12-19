@@ -101,7 +101,7 @@ body.startpage-body, body.startpage-body #root {
 /* 카드 기본 스타일 */
 .hacker-card {
   width: 100%; 
-  min-height: 320px;
+  height: 380px;
   background-color: var(--card-bg);
   border: 1px solid #e5e7eb;
   border-radius: 16px;
@@ -177,7 +177,7 @@ body.startpage-body, body.startpage-body #root {
 .hacker-card.locked .level-desc { color: #9ca3af; }
 .hacker-card.locked .status-dot.red { background-color: #d1d5db; box-shadow: none; }
 
-.lock-icon { font-size: 1.2rem; text-align: center; margin: 2rem 0; color: #9ca3af; font-weight: bold; }
+.lock-icon { font-size: 1rem; text-align: center; margin: 2rem 0; color: #9ca3af; font-weight: bold; }
 
 .hacker-card.locked:hover { background-color: #fef2f2; border-color: var(--muted-danger); }
 .hacker-card.locked:hover .lock-icon { color: var(--muted-danger); }
@@ -191,3 +191,6 @@ body.startpage-body, body.startpage-body #root {
     font-size: 2.5rem;
   }
 }
+
+
+

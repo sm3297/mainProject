@@ -1,63 +1,49 @@
-// src/components/startpage/SignupPage.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signupAPI } from './MockApi';
+import { updateUserAPI, deleteUserAPI } from './MockApi';
+import { useAuth } from '../../context/AuthContext';
 import './Auth.css';
-import { SHA256, enc } from 'crypto-js'; // import 구문 살짝 정리
+import { SHA256, enc } from 'crypto-js';
 
-const SignupPage = () => {
+const ProfilePage = () => {
   const navigate = useNavigate();
+  const { user, updateProfile, logout } = useAuth();
 
   const [formData, setFormData] = useState({
     email: '',
+    name: '',
     password: '',
     confirmPassword: '',
-    name: '',
     birthdate: '',
     phoneNumber: '',
     nationality: '',
-    status: '대학(원)생',
+    status: '',
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        email: user.email,
+        name: user.name,
+        password: '',
+        confirmPassword: '',
+        birthdate: user.birthdate,
+        phoneNumber: user.phoneNumber || '',
+        nationality: user.nationality || '',
+        status: user.status || '대학(원)생',
+      });
+    }
+  }, [user]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleNumericInput = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value.replace(/\D/g, '') });
-  };
-
-  const handleNoNumericInput = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value.replace(/[0-9]/g, '') });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // 이메일 유효성 검사 (간단한 정규식)
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      setError('유효한 이메일 주소를 입력해주세요.');
-      return;
-    }
-
-    // 생년월일 유효성 검사 (8자리 숫자)
-    if (!/^\d{8}$/.test(formData.birthdate)) {
-      setError('생년월일은 8자리 숫자로 입력해주세요 (예: 19900101).');
-      return;
-    }
-
-    // 국적 유효성 검사 (비어있지 않음)
-    if (!formData.nationality.trim()) {
-      setError('국적을 입력해주세요.');
-      return;
-    }
-
-    if (formData.password !== formData.confirmPassword) {
+    if (formData.password && formData.password !== formData.confirmPassword) {
       setError('비밀번호가 일치하지 않습니다.');
       return;
     }
@@ -66,26 +52,25 @@ const SignupPage = () => {
     setError('');
 
     try {
-      // 비밀번호 암호화
-      const salt = Math.random().toString(36).substring(2);
-      const hashedPassword = SHA256(formData.password + salt).toString(enc.Hex);
-
-      // API 호출
-      await signupAPI({ 
-        email: formData.email, 
-        hashedPassword, 
-        salt, 
+      const updateData = {
         name: formData.name,
-        birthdate: formData.birthdate,
         phoneNumber: formData.phoneNumber,
         nationality: formData.nationality,
         status: formData.status,
-        level: 1 // 🔹 [추가됨] 신규 회원은 레벨 1부터 시작 (필요시 0으로 변경)
-      });
+      };
 
-      alert('회원가입 성공! 로그인 페이지로 이동합니다.');
-      
-      navigate('/login'); 
+      if (formData.password) {
+        const salt = Math.random().toString(36).substring(2);
+        const hashedPassword = SHA256(formData.password + salt).toString(enc.Hex);
+        updateData.salt = salt;
+        updateData.hashedPassword = hashedPassword;
+      }
+
+      const updatedUser = await updateUserAPI(user.id, updateData);
+      updateProfile(updatedUser);
+
+      alert('정보가 수정되었습니다.');
+      navigate('/'); 
       
     } catch (err) {
       setError(err.message);
@@ -94,54 +79,71 @@ const SignupPage = () => {
     }
   };
 
+  const handleDelete = async () => {
+    const input = prompt("탈퇴하려면 'DELETE'라고 입력하세요.");
+    if (input !== 'DELETE') return;
+
+    setIsLoading(true);
+    try {
+      await deleteUserAPI(user.id);
+      alert("계정이 삭제되었습니다.");
+      logout(); 
+      navigate('/'); 
+    } catch (error) {
+      alert("탈퇴 실패: " + error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (!user) {
+    return <div>로그인이 필요합니다.</div>;
+  }
+
   return (
     <div className="auth-wrapper">
       <div className="auth-form-container">
-        <h2>회원가입</h2>
+        <h2>회원 정보 수정</h2>
         <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label htmlFor="name">이름</label>
-            <input 
-              id="name"
-              name="name" 
-              placeholder="홍길동"
-              value={formData.name}
-              onChange={handleChange} 
-              required 
-            />
-          </div>
           <div className="input-group">
             <label htmlFor="email">이메일</label>
             <input 
               type="email" 
               id="email"
               name="email" 
-              placeholder="test@example.com"
               value={formData.email}
+              readOnly
+              className="readonly-input"
+            />
+          </div>
+          <div className="input-group">
+            <label htmlFor="name">이름</label>
+            <input 
+              id="name"
+              name="name" 
+              value={formData.name}
               onChange={handleChange} 
               required 
             />
           </div>
           <div className="input-group">
-            <label htmlFor="password">비밀번호</label>
+            <label htmlFor="password">새 비밀번호</label>
             <input 
               type="password" 
               id="password"
               name="password" 
-              value={formData.password}
+              placeholder="변경시에만 입력"
               onChange={handleChange} 
-              required 
             />
           </div>
           <div className="input-group">
-            <label htmlFor="confirmPassword">비밀번호 확인</label>
+            <label htmlFor="confirmPassword">새 비밀번호 확인</label>
             <input 
               type="password" 
               id="confirmPassword"
               name="confirmPassword" 
-              value={formData.confirmPassword}
+              placeholder="변경시에만 입력"
               onChange={handleChange} 
-              required 
             />
           </div>
           <div className="input-group">
@@ -150,10 +152,9 @@ const SignupPage = () => {
               id="birthdate"
               name="birthdate" 
               value={formData.birthdate}
-              placeholder="19900101"
-              onChange={handleNumericInput} 
               maxLength="8"
-              required 
+              readOnly
+              className="readonly-input"
             />
           </div>
           <div className="input-group">
@@ -161,7 +162,6 @@ const SignupPage = () => {
             <input 
               id="phoneNumber"
               name="phoneNumber" 
-              placeholder="010-1234-5678"
               value={formData.phoneNumber}
               onChange={handleChange} 
               required 
@@ -171,10 +171,9 @@ const SignupPage = () => {
             <label htmlFor="nationality">국적</label>
             <input 
               id="nationality"
-              name="nationality"
+              name="nationality" 
               value={formData.nationality}
-              placeholder="대한민국"
-              onChange={handleNoNumericInput} 
+              onChange={handleChange} 
               required 
             />
           </div>
@@ -183,8 +182,8 @@ const SignupPage = () => {
             <select 
               id="status"
               name="status" 
-              onChange={handleChange} 
               value={formData.status}
+              onChange={handleChange} 
               required
             >
               <option value="대학(원)생">대학(원)생</option>
@@ -195,19 +194,22 @@ const SignupPage = () => {
 
           {error && <p className="error-msg">{error}</p>}
 
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? '처리 중...' : '가입하기'}
-          </button>
+          <div className="form-actions">
+            <button type="submit" disabled={isLoading}>
+              {isLoading ? '처리 중...' : '수정하기'}
+            </button>
+            <button type="button" onClick={handleDelete} disabled={isLoading} className="delete-button">
+              회원 탈퇴
+            </button>
+          </div>
         </form>
         
         <p className="switch-text">
-          <span onClick={() => navigate('/login')}>로그인</span>
-          {' | '}
-          <span onClick={() => navigate('/')}>뒤로가기</span>
+          <span onClick={() => navigate(-1)}>뒤로가기</span>
         </p>
       </div>
     </div>
   );
 };
 
-export default SignupPage;
+export default ProfilePage;

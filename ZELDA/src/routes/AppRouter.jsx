@@ -19,6 +19,8 @@ import AdminPage from '../pages/level1/AdminPage';
 
 import FinalPage from '../pages/finalpage/FinalPage';
 
+import ProfilePage from '../pages/startpage/ProfilePage';
+
 const AppRouter = () => {
   const { user } = useAuth(); // 로그인 여부 확인
 
@@ -31,6 +33,7 @@ const AppRouter = () => {
         {/* 로그인/회원가입: 이미 로그인했다면 메인으로 튕겨내기 */}
         <Route path="/login" element={user ? <Navigate to="/" /> : <LoginPage />} />
         <Route path="/signup" element={user ? <Navigate to="/" /> : <SignupPage />} />
+        <Route path="/profile" element={user ? <ProfilePage /> : <Navigate to="/login" />} />
 
         {/* 게임 레벨들 */}
         <Route path="/level1" element={<Level1 />} />

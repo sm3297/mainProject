@@ -54,7 +54,7 @@
     margin-bottom: 0.5rem;
   }
   
-  .input-group input {
+  .input-group input, .input-group select {
     width: 100%;
     padding: 0.8rem 1rem;
     border: 2px solid #e5e7eb;
@@ -66,19 +66,17 @@
     background-color: #f9fafb;
   }
   
-  .input-group input:focus {
+  .input-group input:focus, .input-group select:focus {
     outline: none;
     border-color: var(--accent-color);
     background-color: #ffffff;
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
   }
   
-  /* 버튼 스타일 (StartPage의 execute-cmd 확장) */
-  button[type="submit"] {
+  /* 버튼 스타일 */
+  .auth-form-container button {
     width: 100%;
     padding: 1rem;
-    margin-top: 1rem;
-    background-color: var(--text-main); /* 기본 검정 */
     color: white;
     border: none;
     border-radius: 8px;
@@ -88,15 +86,42 @@
     transition: background-color 0.2s;
   }
   
+  button[type="submit"] {
+    margin-top: 1rem;
+    background-color: var(--text-main); /* 기본 검정 */
+  }
+  
   button[type="submit"]:hover:not(:disabled) {
     background-color: var(--accent-color); /* 호버 시 파란색 */
   }
   
   button:disabled {
-    background-color: #d1d5db;
+    background-color: #d1d5db !important;
     cursor: not-allowed;
   }
   
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .form-actions button {
+    margin-top: 0;
+  }
+  
+  .form-actions button[type="submit"] {
+    background-color: var(--text-main);
+  }
+  
+  .delete-button {
+    background-color: var(--muted-danger);
+  }
+  
+  .delete-button:hover:not(:disabled) {
+    background-color: #c81e1e; /* A darker red */
+  }
+
   /* 전환 텍스트 */
   .switch-text {
     margin-top: 1.5rem;
@@ -116,7 +141,7 @@
   }
   
   .error-msg {
-    color: var(--danger-color);
+    color: var(--muted-danger);
     font-size: 0.85rem;
     margin-top: -0.5rem;
     margin-bottom: 1rem;

@@ -86,6 +86,8 @@ const LoginPage = () => {
 
         <p className="switch-text">
           계정이 없으신가요? <span onClick={() => navigate('/signup')}>회원가입</span>
+          <div></div>
+          <span onClick={() => navigate('/')}>뒤로가기</span>
         </p>
       </div>
     </div>

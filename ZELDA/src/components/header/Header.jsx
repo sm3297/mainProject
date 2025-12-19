@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 import { useState } from 'react';
-import UserDetailModal from '../../pages/startpage/UserDetailModal';
+import { useAuth } from '../../context/AuthContext';
+import LogoutModal from './LogoutModal';
 
 const UserAvatar = ({ name, onClick }) => {
     const initial = name ? name.charAt(0).toUpperCase() : 'U';
@@ -16,8 +17,14 @@ const UserAvatar = ({ name, onClick }) => {
 };
 
 export default function Header({ level, user }) {
+    const navigate = useNavigate();
+    const { logout } = useAuth();
+    const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
-    const [isModalOpen, setIsModalOpen] = useState(false); 
+    const handleLogout = () => {
+      logout();
+      setIsLogoutModalOpen(false);
+    };
 
     return(
         <div>
@@ -28,14 +35,17 @@ export default function Header({ level, user }) {
                         {level && <span className="level-title">| Level {level}</span>} 
                     </Link>
 
-                    {isModalOpen && <UserDetailModal onClose={() => setIsModalOpen(false)} />}
-
                     <div className="top-nav">
                         {user ? (
-                            <UserAvatar 
-                                name={user.name} 
-                                onClick={() => setIsModalOpen(true)} 
-                            />
+                            <>
+                                <UserAvatar 
+                                    name={user.name} 
+                                    onClick={() => navigate('/profile')} 
+                                />
+                                <button onClick={() => setIsLogoutModalOpen(true)} className="nav-btn">
+                                    LOGOUT
+                                </button>
+                            </>
                         ) : (
                             <>
                                 <Link to="/login" className="nav-btn">
@@ -49,6 +59,12 @@ export default function Header({ level, user }) {
                     </div>
                 </div>
             </header>
+            {isLogoutModalOpen && (
+                <LogoutModal 
+                    onConfirm={handleLogout}
+                    onCancel={() => setIsLogoutModalOpen(false)}
+                />
+            )}
         </div>   
     )
 }

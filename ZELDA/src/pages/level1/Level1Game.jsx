@@ -93,7 +93,7 @@ function Level1Game() {
                     </main>
                 </div>
             </div>
-                <Link to="/level1" className="sim-exit-btn">이론으로 돌아가기</Link>
+                <Link to="/level1" className="sim-exit-btn">🚪 이론으로 돌아가기</Link>
         </div>
     );
 }

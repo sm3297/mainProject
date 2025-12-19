@@ -216,7 +216,7 @@ if( isset( $_GET['Change'] ) ) {
                 </div>
             </div>
             
-            <Link to="/level3" className="sim-exit-btn">이론으로 돌아가기</Link>
+            <Link to="/level3" className="sim-exit-btn">🚪 이론으로 돌아가기</Link>
         </div>
     );
 }

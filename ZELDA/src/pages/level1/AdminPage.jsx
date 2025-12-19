@@ -82,7 +82,7 @@ function Level1AdminPage() {
                 </div>
             </div>
 
-            <Link to="/" className="sim-exit-btn">미션 완료 (홈으로 이동)</Link>
+            <Link to="/" className="sim-exit-btn">🚪 미션 완료 (홈으로 이동)</Link>
         </div>
     );
 }

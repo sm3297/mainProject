@@ -57,7 +57,7 @@
   }
   
   .modal-confirm-logout-btn {
-    background-color: var(--danger-color);
+    background-color: var(--muted-danger);
     color: white;
   }
   

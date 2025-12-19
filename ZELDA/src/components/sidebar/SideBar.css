@@ -16,6 +16,12 @@
     margin-bottom: 15px;
     font-size: 0.8rem;
   }
+
+  .sidebar-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
   
   .sidebar-link {
     display: block;
@@ -46,8 +52,6 @@
     text-decoration: none;
     font-weight: 700;
   }
-  
-  /* Level 1 대시보드 내부의 모의 사이드바 (Mock Sidebar) */
   .mock-sidebar {
     width: 240px;
     background-color: #f8fafc;

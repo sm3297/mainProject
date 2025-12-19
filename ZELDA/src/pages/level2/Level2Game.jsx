@@ -13,13 +13,10 @@ const STORAGE = {
 const SECRET_FLAG = "FLAG{Praise}";
 
 export default function Level2Game() {
-  // --- State ---
   const [notes, setNotes] = useState([]);
   const [selected, setSelected] = useState(null);
   const [plainContent, setPlainContent] = useState("");
   const [isDecrypted, setIsDecrypted] = useState(false);
-  
-  // UI State
   const [isComposeOpen, setIsComposeOpen] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const [showRecovery, setShowRecovery] = useState(false);
@@ -183,7 +180,6 @@ export default function Level2Game() {
                   ×
                 </button>
               </div>
-              {/* 목록: 텍스트로만 표시 (안전) */}
               <div className="note-title-preview">
                 {n.title}
               </div>

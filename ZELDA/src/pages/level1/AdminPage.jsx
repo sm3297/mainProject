@@ -5,7 +5,6 @@ import './Level1.css';
 function Level1AdminPage() {
     return (
         <div className="level1-wrapper">
-            {/* 창 크기 고정 (1000px) */}
             <div className="mock-browser wide-mode">
                 <header className="mock-header admin-header">
                     <div className="mock-logo">
@@ -17,7 +16,6 @@ function Level1AdminPage() {
                     </div>
                 </header>
 
-                {/* 사이드바 */}
                 <div className="mock-body horizontal-layout">
                     <aside className="mock-sidebar">
                         <div className="mock-widget">
@@ -31,7 +29,6 @@ function Level1AdminPage() {
                         </div>
                     </aside>
 
-                    {/* 본문 */}
                     <main className="mock-content wide-content">
                         
                         <div className="status-alert">

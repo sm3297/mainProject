@@ -129,7 +129,7 @@ function Level1() {
                         </div>
 
                         <div className="info-box" style={{ backgroundColor: '#fff7ed', border: '1px solid #ffedd5', color: '#9a3412' }}>
-                            <strong>🎯 직접 해보세요:</strong><br/>
+                            <strong>직접 해보세요:</strong><br/>
                             아이디 칸에 <span className="code-snippet" style={{background:'#fff', color:'#ea580c'}}>' OR 1=1 --</span> 를 입력해보세요.<br/>
                             비밀번호 검증 줄이 취소선(<s>deleted</s>)으로 바뀌는 게 보이나요? 이제 비밀번호를 몰라도 로그인이 됩니다!
                         </div>
@@ -151,12 +151,26 @@ function Level1() {
                         </p>
 
                         <div className="query-viewer" style={{ background: '#1e293b', marginTop: '10px' }}>
-                            <span style={{color:'#6a9955'}}>// 안전한 코드 예시 (Node.js - mysql2 라이브러리)</span><br/><br/>
-                            <span className="sql-kw">const</span> query = <span style={{color:'#ce9178'}}>"SELECT * FROM users WHERE username = ? AND password = ?"</span>;<br/>
-                            <span style={{color:'#6a9955'}}>// 쿼리 템플릿과 사용자 입력을 명확히 분리하여 전달</span><br/>
-                            <span className="sql-kw">const</span> [rows] = <span className="sql-kw">await</span> db.execute(query, [ <span style={{color:'#ce9178'}}>'admin'</span>, <span style={{color:'#ce9178'}}>'some_password'</span> ]);<br/><br/>
-                            <span style={{color:'#6a9955'}}>// 만약 해커가 username에 ' OR 1=1 -- 를 입력해도...</span><br/>
-                            <span style={{color:'#6a9955'}}>// DB는 그저 이름이 "' OR 1=1 --"인 사용자를 찾으려고만 할 뿐,</span><br/>
+                            <span style={{color:'#6a9955'}}>// 안전한 코드 예시 (Node.js - mysql2 라이브러리)</span>
+                            <br/><br/>
+
+                            <span className="sql-kw">const</span> query = <span style={{color:'#ce9178'}}>"SELECT * FROM users WHERE username = ? AND password = ?"</span>;
+                            <br/>
+
+                            <span style={{color:'#6a9955'}}>// 쿼리 템플릿과 사용자 입력을 명확히 분리하여 전달</span>
+                            <br/>
+
+                            <span className="sql-kw">const</span> [rows] = <span className="sql-kw">await</span> 
+                            db.execute(query, [ <span style={{color:'#ce9178'}}>'admin'</span>, 
+                            <span style={{color:'#ce9178'}}>'some_password'</span> ]);
+                            <br/><br/>
+
+                            <span style={{color:'#6a9955'}}>// 만약 해커가 username에 ' OR 1=1 -- 를 입력해도...</span>
+                            <br/>
+
+                            <span style={{color:'#6a9955'}}>// DB는 그저 이름이 "' OR 1=1 --"인 사용자를 찾으려고만 할 뿐,</span>
+                            <br/>
+                            
                             <span style={{color:'#6a9955'}}>// SQL 구문이 깨지지 않습니다.</span>
                         </div>
 

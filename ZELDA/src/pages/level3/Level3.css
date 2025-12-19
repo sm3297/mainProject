@@ -1,10 +1,9 @@
-/* [1] GLOBAL & SHARED Styles */
 :root {
-    --bg-app: #f1f5f9;       /* Light Gray Background */
-    --navy-dark: #1e293b;    /* Dark Navy */
-    --blue-primary: #3b82f6; /* Bright Blue */
-    --red-danger: #ef4444;   /* Danger Red */
-    --border-color: #e2e8f0; /* Border Color */
+    --bg-app: #f1f5f9;       
+    --navy-dark: #1e293b;    
+    --blue-primary: #3b82f6; 
+    --red-danger: #ef4444;   
+    --border-color: #e2e8f0;
     --text-main: #1e293b;
     --text-sub: #64748b;
 }
@@ -218,12 +217,12 @@ body {
   text-decoration: none;
   font-size: 12px;
   opacity: 0.8;
-  transition: all 0.3s ease; /* Add transition for smooth effect */
+  transition: all 0.3s ease; 
 }
 
 .sim-exit-btn:hover {
-  background-color: #555; /* Darken background on hover */
-  opacity: 1; /* Make it fully opaque */
-  transform: translateY(-2px); /* Lift slightly */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  background-color: #555;
+  opacity: 1; 
+  transform: translateY(-2px); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

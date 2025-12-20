@@ -36,7 +36,6 @@ export default function Header({ level, user }) {
                     </Link>
 
                     <div className="top-nav">
-                        <Link to="/qna" className="nav-btn">Q&A</Link>
                         {user ? (
                             <>
                                 <UserAvatar 
@@ -57,6 +56,7 @@ export default function Header({ level, user }) {
                                 </Link>
                             </>
                         )}
+                        <Link to="/qna" className="nav-btn">Q&A</Link>
                     </div>
                 </div>
             </header>

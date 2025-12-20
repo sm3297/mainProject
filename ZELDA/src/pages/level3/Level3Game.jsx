@@ -199,13 +199,13 @@ if( isset( $_GET['Change'] ) ) {
                         {/* 4. 미션 가이드 */}
                         <div className="bank-section">
                             <div className="mission-console1">
-                                <div className="console-header">Hacking Flow</div>
-                                <div className="console-body">
+                                <div className="console-header1">Hacking Flow</div>
+                                <div className="console-body1">
                                     <p>1. 위 view source 버튼을 클릭 후, 소스코드를 분석하세요.</p>
                                     <p>2. 위 리스트에서 <strong>AUD</strong>를 찾아 클릭하세요.</p>
                                     <p>3. F12 개발자 도구에서 <code>user_token</code> 값을 찾으세요.</p>
                                     <p>4. 아래 코드를 Console 탭에 입력하세요.</p>
-                                    <div className="payload-box">
+                                    <div className="payload-box1">
                                         hack('?Change=1&password_new=hacker123&password_conf=hacker123&user_token=<span style={{color:'yellow'}}>[TOKEN]</span>')
                                     </div>
                                 </div>

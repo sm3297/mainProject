@@ -41,7 +41,7 @@ function Level1() {
                     <hr style={{ margin: '30px 0', border: 'none', borderTop: '1px solid #e2e8f0' }} />
 
                     {/* 1. 개요 */}
-                    <div id="intro">
+                    <div id="intro" style={{ paddingTop: '50px' }}>
                         <h2 className="sub-title1">01. SQL Injection이란?</h2>
                         <p className="text-body">
                             SQL Injection(SQL 삽입)은 해커가 웹 애플리케이션의 입력란에 악의적인 <strong>데이터베이스 명령어(SQL)</strong>를 몰래 집어넣어, 

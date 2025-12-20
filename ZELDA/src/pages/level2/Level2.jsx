@@ -47,7 +47,7 @@ function Level2() {
                     <hr style={{ margin: '30px 0', border: 'none', borderTop: '1px solid #e2e8f0' }} />
 
                     {/* 1. 개요 */}
-                    <div id="intro">
+                    <div id="intro" style={{ paddingTop: '50px' }}>
                         <h2 className="sub-title1">01. XSS란 무엇인가?</h2>
                         <p className="text-body">
                             <strong>Cross-Site Scripting (XSS)</strong>은 공격자가 악성 스크립트(주로 JavaScript)를 
@@ -64,7 +64,7 @@ function Level2() {
                     </div>
 
                     {/* 2. 원리 분석 및 유형 (핵심 컨텐츠) */}
-                    <div id="mechanism" style={{ paddingTop: '5px' }}>
+                    <div id="mechanism" style={{ paddingTop: '50px' }}>
                         <h2 className="sub-title1">02. 공격 원리 및 유형</h2>
                         <p className="text-body">
                             XSS는 웹 애플리케이션이 사용자 입력값을 **유효성 검사(Validation)**나 
@@ -91,7 +91,7 @@ function Level2() {
                     </div>
 
                     {/* 3. 시뮬레이터 */}
-                    <div id="simulation" style={{ paddingTop: '5px' }}>
+                    <div id="simulation" style={{ paddingTop: '50px' }}>
                         <h2 className="sub-title1">03. 실시간 실행 시뮬레이터 (Reflected XSS)</h2>
                         <p className="text-body">
                             사용자의 입력이 HTML 코드의 일부로 인식되어 위험한 스크립트를 실행하는 상황을 직접 시뮬레이션 해보세요.
@@ -136,7 +136,7 @@ function Level2() {
                     </div>
 
                     {/* 4. 방어법 */}
-                    <div id="defense" style={{ paddingTop: '5px' }}>
+                    <div id="defense" style={{ paddingTop: '50px' }}>
                         <h2 className="sub-title1">04. 어떻게 막아야 할까요?</h2>
                         <p className="text-body">
                             해결책은 간단합니다. 사용자의 입력값을 브라우저가 **'HTML 코드'로 인식하지 않도록** 만드는 것입니다.

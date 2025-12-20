@@ -71,7 +71,7 @@ function Level3() {
                     <hr style={{ margin: '30px 0', border: 'none', borderTop: '1px solid #e2e8f0' }} />
 
                     {/* 1. 개요 */}
-                    <div id="intro">
+                    <div id="intro" style={{ paddingTop: '50px' }}>
                         <h2 className="sub-title1">01. CSRF & 로직 결함이란?</h2>
                         <p className="text-body">
                             <strong>CSRF (Cross-Site Request Forgery)</strong>는 해커가 사용자의 의지와 무관하게, 
@@ -88,7 +88,7 @@ function Level3() {
                     </div>
 
                     {/* 2. 원리 분석 */}
-                    <div id="mechanism" style={{ paddingTop: '5px' }}>
+                    <div id="mechanism" style={{ paddingTop: '50px' }}>
                         <h2 className="sub-title1">02. 공격 원리 해부 (Anatomy)</h2>
                         <p className="text-body">
                             이번 레벨의 핵심인 <strong>'상태 의존성 공격'</strong>은 다음 2단계로 이루어집니다.
@@ -110,7 +110,7 @@ function Level3() {
                     </div>
 
                     {/* 3. 시뮬레이터  */}
-                    <div id="simulation" style={{ paddingTop: '5px' }}>
+                    <div id="simulation" style={{ paddingTop: '50px' }}>
                         <h2 className="sub-title1">03. 상태 변조 시뮬레이터</h2>
                         <p className="text-body">
                             직접 체험해봅시다. 아래는 <strong>'쇼핑몰 포인트 시스템'</strong>입니다. 
@@ -164,7 +164,7 @@ function Level3() {
                     </div>
 
                     {/* 4. 방어법 */}
-                    <div id="defense" style={{ paddingTop: '5px' }}>
+                    <div id="defense" style={{ paddingTop: '50px' }}>
                         <h2 className="sub-title1">04. 어떻게 막아야 할까요?</h2>
                         <p className="text-body">
                             두 가지 방어 기법이 동시에 필요합니다.

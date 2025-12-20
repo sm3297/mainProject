@@ -20,6 +20,7 @@ import AdminPage from '../pages/level1/AdminPage';
 import FinalPage from '../pages/finalpage/FinalPage';
 
 import ProfilePage from '../pages/startpage/ProfilePage';
+import QnaPage from '../pages/qna/QnaPage';
 
 const AppRouter = () => {
   const { user } = useAuth(); // 로그인 여부 확인
@@ -34,6 +35,7 @@ const AppRouter = () => {
         <Route path="/login" element={user ? <Navigate to="/" /> : <LoginPage />} />
         <Route path="/signup" element={user ? <Navigate to="/" /> : <SignupPage />} />
         <Route path="/profile" element={user ? <ProfilePage /> : <Navigate to="/login" />} />
+        <Route path="/qna" element={<QnaPage />} />
 
         {/* 게임 레벨들 */}
         <Route path="/level1" element={<Level1 />} />

@@ -1,0 +1,223 @@
+.qna-page-container {
+  background-color: #f3f4f1;
+  min-height: 100vh;
+}
+
+.qna-main-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 100px 20px 40px;
+}
+
+.qna-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1e293b;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.qna-subtitle {
+  font-size: 1.1rem;
+  color: #64748b;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* --- 질문 등록 폼 --- */
+.qna-form-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  margin-bottom: 40px;
+}
+
+.qna-form-container form {
+  display: flex;
+  align-items: center; 
+  gap: 10px;
+}
+
+.qna-input,
+.qna-submit-btn {
+  height: 54px !important; 
+  
+  box-sizing: border-box !important; /* 테두리 포함 크기 */
+  margin: 0 !important; /* 모든 마진 강제 초기화 */
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  
+  /* 브라우저 기본 스타일 제거 */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* 입력창 스타일 */
+.qna-input {
+  flex-grow: 1; 
+  border: 1px solid #cbd5e1;
+  padding: 0 20px; 
+  background-color: #fff;
+  transition: all 0.2s;
+  line-height: normal; 
+}
+
+.qna-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* 버튼 스타일 */
+.qna-submit-btn {
+  background-color: #2563eb;
+  color: white;
+  border: 1px solid #2563eb;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0 28px; 
+  white-space: nowrap; 
+
+  margin-top: 0 !important; 
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qna-submit-btn:hover {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+
+/* --- 아래는 기존과 동일 --- */
+.qna-login-prompt {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 40px;
+  text-align: center;
+  color: #475569;
+}
+.qna-login-prompt a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+.qna-login-prompt a:hover {
+  text-decoration: underline;
+}
+
+.qna-loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #64748b;
+  padding: 50px;
+}
+
+.qna-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.qna-item {
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.qna-item:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.qna-question {
+  padding: 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.qna-question-header {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.qna-author {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #94a3b8;
+}
+
+.qna-arrow {
+  transition: transform 0.3s ease;
+  font-size: 1rem;
+  color: #94a3b8;
+  margin-left: 20px;
+}
+
+.qna-arrow.open {
+  transform: rotate(180deg);
+  color: #2563eb;
+}
+
+.qna-answer {
+  padding: 0 20px 20px;
+  border-top: 1px solid #f1f5f9;
+  animation: fadeIn 0.5s ease;
+}
+
+.qna-answer p {
+  margin: 0;
+  padding-top: 20px;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #475569;
+}
+
+.qna-actions {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px dashed #e2e8f0;
+  text-align: right;
+}
+
+.qna-delete-btn {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.qna-delete-btn:hover {
+  background-color: #dc2626;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

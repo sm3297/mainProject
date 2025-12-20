@@ -30,3 +30,14 @@
 - Interactive Sidebar: 본문 스크롤 위치를 감지하여 현재 목차를 강조(Scroll Spy)하고, 클릭 시 즉시 이동(Anchor Navigation) 기능 제공.
 
 - Quick Access: 이론 학습 중 언제든 실습 화면으로 전환할 수 있는 CTA 버튼 배치로 학습 동선 최적화.
+
+## Tech Stack
+Frontend: React, JavaScript, Vite
+
+State Management: Mock API (User/Game Data 기반 상태 관리)
+
+API Integration: Open API (Level 3 환율 데이터 연동)
+
+Deployment: Vercel
+
+

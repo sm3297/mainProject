@@ -7,11 +7,8 @@ import { useAuth } from '../../context/AuthContext';
 
 
 function Level3() { 
-    // --- 1. 네비게이션 상태 ---
     const [activeSection, setActiveSection] = useState('intro');
     const { user } = useAuth();
-
-    // --- 2. 시뮬레이터 상태 (쇼핑몰 포인트 예시) ---
     const [simState, setSimState] = useState('NORMAL');
     const [simPoints, setSimPoints] = useState(100);    
     const [simLog, setSimLog] = useState("// 대기 중...");
@@ -22,18 +19,15 @@ function Level3() {
         { id: 'defense', title: '04. 올바른 방어법' },
       ];
 
-    // 스크롤 핸들러
     const handleNavClick = (sectionId) => {
         setActiveSection(sectionId);
     };
 
-    // [함정] 악성 링크 클릭 (상태 변조)
     const triggerTrap = () => {
-        setSimState('HACKED'); // 사용자 몰래 상태 변경
+        setSimState('HACKED'); 
         setSimLog("[SERVER] 세션 상태가 'HACKED(관리자권한)'로 변조되었습니다.");
     };
 
-    // [정상] 쿠폰 받기 버튼 (트리거)
     const triggerAction = () => {
         if (simState === 'HACKED') {
             setSimPoints(simPoints + 50000);
@@ -44,7 +38,6 @@ function Level3() {
         }
     };
 
-    // 초기화
     const resetSim = () => {
         setSimState('NORMAL');
         setSimPoints(100);

@@ -31,7 +31,7 @@ export default function Header({ level, user }) {
             <header className="hacking-header">
                 <div className="header-content">
                     <Link to="/" > 
-                        <h1 className="hacking-title" >Hacking Lab </h1>
+                        <h1 className="hacking-title" >Cyber WarGame </h1>
                         {level && <span className="level-title">| Level {level}</span>} 
                     </Link>
 

@@ -6,7 +6,6 @@ import SideBar from '../../components/sidebar/SideBar.jsx';
 import { useAuth } from '../../context/AuthContext';
 
 function Level2() { 
-    // 시뮬레이션 상태
     const [activeSection, setActiveSection] = useState('intro');
     const [simInput, setSimInput] = useState('');
     const { user } = useAuth();
@@ -17,15 +16,12 @@ function Level2() {
         { id: 'defense', title: '04. 올바른 방어법' },
       ];
     
-    // 위험한 스크립트 감지 (간단한 예시: <script>)
-    // 실제로는 인코딩되지 않은 <, > 등이 핵심
     const isScriptPresent = simInput.includes('<script>') || simInput.includes('alert(');
 
     const handleNavClick = (sectionId) => {
         setActiveSection(sectionId);
     };
 
-    // React의 dangerouslySetInnerHTML을 이용한 비안전한 출력 시뮬레이션
     const unsafeOutput = (
         <p className="sim-output-text" dangerouslySetInnerHTML={{ __html: simInput || "여기에 입력하신 내용이 출력됩니다." }} />
     );

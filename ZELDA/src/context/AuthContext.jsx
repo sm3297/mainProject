@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('user');
   };
 
-  // 🔹 [프로필 업데이트] 화면 상태 + 로컬 스토리지 동기화
+  // [프로필 업데이트] 화면 상태 + 로컬 스토리지 동기화
   const updateProfile = (updatedData) => {
     setUser((prev) => {
       if (!prev) return null; // 유저가 없으면 중단
@@ -39,11 +39,9 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
-  // 🔹 [레벨 업데이트 로직] : 요청하신 핵심 로직
+  // [레벨 업데이트 로직] : 요청하신 핵심 로직
   const updateLevel = async (newLevel) => {
     if (!user) return; // 로그인 안 했으면 무시
-
-    // user.level이 undefined일 경우를 대비해 0으로 처리
     const currentLevel = user.level || 0;
 
     // 1. 기존 레벨보다 낮거나 같으면 업데이트 안 함 (서버 요청 방지)
@@ -54,7 +52,6 @@ export const AuthProvider = ({ children }) => {
 
     try {
       // 2. 서버(Mock API)에 업데이트 요청 (DB 저장용)
-      // user.id를 사용하므로 '유저마다' 개별적으로 저장됩니다.
       await updateUserAPI(user.id, { level: newLevel });
       
       // 3. 서버 저장이 성공하면 -> 화면과 로컬 스토리지 업데이트
